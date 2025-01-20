@@ -10,7 +10,7 @@ public class Sunpter {
 
         //Resources
         Scanner scanner = new Scanner(System.in); //Scanner class for user input, for now
-        String[] strArr= new String[100];
+        Task[] tasks= new Task[100];
         int x = 0; //index pointer for strArr
 
         System.out.println(encapsulateInLines(GREETING));
@@ -23,9 +23,9 @@ public class Sunpter {
             else if(input.equals("liste")) {
                 StringBuilder sb = new StringBuilder();
                 int taskNumber = 1;
-                for(String task: strArr) {
+                for(Task task: tasks) {
                     if(task != null) {
-                        sb.append("\n" + taskNumber + ". " + task);
+                        sb.append("\n" + taskNumber + ". " + task.getName());
                     }
                     taskNumber++;
                 }
@@ -33,7 +33,7 @@ public class Sunpter {
             }
             else {
                 System.out.println(encapsulateInLines("added: " + input));
-                strArr[x] = input;
+                tasks[x] = new Task(input);
                 x++;
             }
         }
