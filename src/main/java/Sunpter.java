@@ -10,6 +10,9 @@ public class Sunpter {
 
         //Resources
         Scanner scanner = new Scanner(System.in); //Scanner class for user input, for now
+        String[] strArr= new String[100];
+        int x = 0; //index pointer for strArr
+
         System.out.println(encapsulateInLines(GREETING));
 
         while(true) {
@@ -17,7 +20,22 @@ public class Sunpter {
             if(input.equals("Au revoir")) {
                 break;
             }
-            System.out.println(encapsulateInLines(input));
+            else if(input.equals("liste")) {
+                StringBuilder sb = new StringBuilder();
+                int taskNumber = 1;
+                for(String task: strArr) {
+                    if(task != null) {
+                        sb.append("\n" + taskNumber + ". " + task);
+                    }
+                    taskNumber++;
+                }
+                System.out.println(encapsulateInLines(sb.toString()));
+            }
+            else {
+                System.out.println(encapsulateInLines("added: " + input));
+                strArr[x] = input;
+                x++;
+            }
         }
         scanner.close();
         System.out.println(encapsulateInLines(EXIT));
