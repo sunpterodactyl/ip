@@ -28,8 +28,8 @@ public class Roster {
         rosterList.add(task);
     }
     //delete a task from the roster
-    public void removeTask(Task task, int index) {
-        rosterList.remove(index);
+    public void removeTask(int index) {
+        rosterList.remove(index-1);
     }
     //mark a task
     public void markTaskAsCompleted(int num) {

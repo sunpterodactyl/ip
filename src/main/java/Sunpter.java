@@ -37,13 +37,21 @@ public class Sunpter {
                     int number = Integer.parseInt(input.split(" ")[1]);
                     roster.markTaskAsUncompleted(number);
                     System.out.println(encapsulateInLines(taskUnDone + "\n" + roster.getTask(number).toString()));
+                } else if (input.startsWith("delete")) {
+                    int number = Integer.parseInt(input.split(" ")[1]);
+                    Task task = roster.getTask(number);
+                    roster.removeTask(number);
+                    String removedTask = "Noted. I've removed this task:\n" +
+                                            "\n" + task.toString() + "\n" +
+                                             "Now you have " + roster.numberofTasks() + " tasks in the list.";
+                    System.out.println(encapsulateInLines(removedTask));
                 } else {
                     //add input
                     Task newTask = FactoryTask.newTask(input);
                     roster.addTask(newTask);
-                    String taskDone = "Got it. I've added this task:\n" +
-                            " " + newTask.toString() +
-                            "\n Now you have " + roster.numberofTasks() + " tasks in the list.";
+                    String taskDone = "Got it. I've added this task:" +
+                            "\n" + newTask.toString() + "\n" +
+                            "Now you have " + roster.numberofTasks() + " tasks in the list.";
                     System.out.println(encapsulateInLines(taskDone));
                 }
             }
@@ -62,7 +70,7 @@ public class Sunpter {
     private static boolean isValidCommand(String command) {
         return command.equals("Bye") || command.equals("mark") || command.equals("unmark")
                 || command.equals("todo") || command.equals("event") || command.equals("deadline")
-                || command.equals("liste");
+                || command.equals("liste") || command.equals("delete");
     }
 
     public static String encapsulateInLines (String str){
