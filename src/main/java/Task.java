@@ -1,6 +1,6 @@
 public class Task {
-    private String name;
-    private boolean completed;
+    protected String name;
+    protected boolean completed;
     //I dont think I need an id for now
 
     public Task(String name) {
@@ -8,6 +8,11 @@ public class Task {
         this.completed = false;
     }
 
+    public String getStatusIcon() {
+        return completed ? "[X]" : "[ ]";
+    }
+
+    //oops not in use yet
     public void setCompleted() {
         this.completed = true;
     }
@@ -18,5 +23,10 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + " " + getName();
     }
 }
