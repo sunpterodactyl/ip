@@ -3,6 +3,8 @@ public class Task {
     protected boolean completed;
     //I dont think I need an id for now
 
+    //TODO: Add in factory method pattern
+
     public Task(String name) {
         this.name = name;
         this.completed = false;
@@ -12,7 +14,6 @@ public class Task {
         return completed ? "[X]" : "[ ]";
     }
 
-    //oops not in use yet
     public void setCompleted() {
         this.completed = true;
     }

@@ -1,10 +1,9 @@
-import java.time.LocalDateTime;
 
 public class Event extends Task{
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private String start;
+    private String end;
 
-    public Event(String name, LocalDateTime start, LocalDateTime end) {
+    public Event(String name, String start, String end) {
         super(name);
         this.start = start;
         this.end = end;
@@ -12,6 +11,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + getName();
+        return "[E]" + getStatusIcon() + " " + getName() + "(from: " + start + " to: "+end +")";
+        //TODO: Implement DateTime
     }
 }

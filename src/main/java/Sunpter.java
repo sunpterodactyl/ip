@@ -16,27 +16,31 @@ public class Sunpter {
 
         while(true) {
             String input = scanner.nextLine();
-            String parts[] = input.split(" ");
-            if(parts[0].equals("Bye")) {
+            String command = input.split(" ")[0];
+            if(command.equals("Bye")) {
                 break;
             }
-            else if(parts[0].equals("liste")) {
+            else if(input.startsWith("liste")) {
                 System.out.println(encapsulateInLines(roster.printRoster()));
             }
-            else if(parts[0].equals("mark")) {
-                int number = Integer.parseInt(parts[1]);
+            else if(input.startsWith("mark")) {
+                int number = Integer.parseInt(input.split(" ")[1]);
                 roster.markTaskAsCompleted(number);
                 System.out.println(encapsulateInLines( taskDone + "\n" + roster.getTask(number).toString()));
             }
-            else if(parts[0].equals("unmark")) {
-                int number = Integer.parseInt(parts[1]);
+            else if(input.startsWith("unmark")) {
+                int number = Integer.parseInt(input.split(" ")[1]);
                 roster.markTaskAsUncompleted(number);
                 System.out.println(encapsulateInLines( taskUnDone + "\n" + roster.getTask(number).toString()));
             }
             else {
                 //add input
-                roster.addTask(new Task(input));
-                System.out.println(encapsulateInLines("added: " + input));
+                Task newTask = FactoryTask.newTask(input);
+                roster.addTask(newTask);
+                String taskDone = "Got it. I've added this task:\n" +
+                                    " " + newTask.toString() +
+                                    "\n Now you have " + roster.numberofTasks() + " tasks in the list.";
+                System.out.println(encapsulateInLines(taskDone));
             }
         }
         scanner.close();

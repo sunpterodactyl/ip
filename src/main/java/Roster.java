@@ -8,6 +8,11 @@ public class Roster {
 
     Roster() {}
 
+    //roster length
+    public int numberofTasks() {
+        return rosterList.size();
+    }
+
     //read from the roster
     public String printRoster() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your roster:\n");
