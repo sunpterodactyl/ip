@@ -1,9 +1,6 @@
 public class Task {
     protected String name;
     protected boolean completed;
-    //I dont think I need an id for now
-
-    //TODO: Add in factory method pattern
 
     public Task(String name) {
         this.name = name;

@@ -13,7 +13,7 @@ public class Sunpter {
         Roster roster = new Roster();
 
         System.out.println(encapsulateInLines(GREETING));
-
+        //TODO: Add in enums
         while(true) {
             String input = scanner.nextLine();
             try {
