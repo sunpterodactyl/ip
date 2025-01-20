@@ -50,7 +50,7 @@ public class Sunpter {
         String horizontalLine = "____________________________________________________________";
         return horizontalLine + "\n" + str + "\n" + horizontalLine;
     }
-    static String GREETING = "Bonjour, je m'apelle Sunpter \n" + "Que puis-je faire pour vous?";
+    static String GREETING = "Bonjour, je m'apelle Sunpter\n" + "Que puis-je faire pour vous?";
     static String EXIT = "Alors, je suis fatigué. Tu parles trop! À bientôt.";
     //update to french later
     static String taskDone = " Nice! I've marked this task as done:";
