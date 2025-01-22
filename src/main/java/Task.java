@@ -1,22 +1,27 @@
 public class Task {
+
+    public enum Status{
+        FINISHED, UNFINISHED;
+    }
+
     protected String name;
-    protected boolean completed;
+    protected Status status;
 
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.status = Status.UNFINISHED;
     }
 
     public String getStatusIcon() {
-        return completed ? "[X]" : "[ ]";
+        return status == status.FINISHED ? "[X]" : "[ ]";
     }
 
     public void setCompleted() {
-        this.completed = true;
+        this.status = status.FINISHED;
     }
 
     public void setNotCompleted() {
-        this.completed = false;
+        this.status = status.UNFINISHED;
     }
 
     public String getName() {
