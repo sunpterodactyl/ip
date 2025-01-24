@@ -29,7 +29,7 @@ public class Roster {
     }
     //delete a task from the roster
     public void removeTask(int index) {
-        rosterList.remove(index-1);
+        rosterList.remove(index - 1);
     }
     //mark a task
     public void markTaskAsCompleted(int num) {
@@ -44,7 +44,6 @@ public class Roster {
     }
 
     //get the task
-    //i will catch any exceptions later ig
     public Task getTask(int num) {
         return rosterList.get(num - 1);
     }

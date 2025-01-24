@@ -10,6 +10,5 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[D]" + getStatusIcon() + " " + getName() + "(by: " + deadline +")";
-        //TODO: Date Time Formatter
     }
 }
