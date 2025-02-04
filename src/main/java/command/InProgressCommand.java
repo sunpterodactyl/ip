@@ -5,12 +5,13 @@ import task.Roster;
 import ui.Ui;
 
 /**
- * Unmark a task as done based on its index number
+ * Unmark a task as in progress based on its index number
+ * Uses command started for simpler parsing
  */
-public class UnmarkCommand extends Command {
+public class InProgressCommand extends Command {
     private final int num;
 
-    public UnmarkCommand(int num) {
+    public InProgressCommand(int num) {
         this.num = num;
     }
 

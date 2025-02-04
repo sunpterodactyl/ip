@@ -19,7 +19,10 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return status == status.FINISHED ? "[X]" : "[ ]";
+        return status == status.FINISHED ? "[X]"
+                                         : status == status.IN_PROGRESS
+                                         ? "[-]"
+                                         : "[ ]";
     }
 
     public void setCompleted() {
@@ -28,7 +31,7 @@ public abstract class Task {
 
     public void setInProgress() {
         this.status = status.IN_PROGRESS;
-    }
+    } //not in use yet
 
     public void setNotCompleted() {
         this.status = status.UNFINISHED;

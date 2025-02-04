@@ -8,7 +8,7 @@ import ui.Ui;
  * Mark a task as done based on its index number
  */
 public class MarkCommand extends Command {
-    private int num;
+    private final int num;
 
     public MarkCommand(int num) {
         this.num = num;
