@@ -4,6 +4,9 @@ import storage.Storage;
 import task.Roster;
 import ui.Ui;
 
+/**
+ * Mark a task as done based on its index number
+ */
 public class MarkCommand extends Command {
     private int num;
 

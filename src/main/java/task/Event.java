@@ -3,6 +3,10 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+/**
+ * Event class - contains a start and end date
+ */
 public class Event extends Task {
 
     private LocalDateTime start;

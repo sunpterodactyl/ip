@@ -12,6 +12,10 @@ public class Storage {
 
     public Storage() {}
 
+    /**
+     * Save tasks into a file
+     * @param tasks
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
             File file = new File(FILE_PATH);
@@ -26,6 +30,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Read saved tasks from the file sunpter.txt and loads it into the chatbot
+     * @return ArrayList<Task>
+     */
     public ArrayList<Task> loadTasks() {
         return new ArrayList<>();//STUB
         //TODO

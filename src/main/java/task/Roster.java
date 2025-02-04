@@ -16,12 +16,19 @@ public class Roster {
     public Roster() {
         this.rosterList = new ArrayList<>();
     }
-    //roster length
+
+    /**
+     * Return the number of tasks in the roster
+     * @return int
+     */
     public int numberofTasks() {
         return rosterList.size();
     }
 
-    //read from the roster
+    /**
+     * Print the roster task toString
+     * @return String
+     */
     public String printRoster() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your roster:\n");
         int taskIndex = 1;
@@ -31,34 +38,50 @@ public class Roster {
         }
         return sb.toString();
     }
-    //add a task to the roster
+
+    /**
+     * Add a task to the roster
+     * @param task
+     */
     public void addTask(Task task) {
         rosterList.add(task);
         STORAGE.saveTasks(rosterList);
     }
-    //delete a task from the roster
+    /**
+     * Delete a task from the roster
+     */
     public void removeTask(int index) {
         rosterList.remove(index - 1);
         STORAGE.saveTasks(rosterList);
     }
-    //mark a task
+
+    /**
+     * Mark a task as completed
+     * @param num
+     */
     public void markTaskAsCompleted(int num) {
         Task completedTask = getTask(num);
         completedTask.setCompleted();
         STORAGE.saveTasks(rosterList);
     }
 
-    //unmark a task
+    /**
+     * Mark a task as uncompleted
+     * @param num
+     */
     public void markTaskAsUncompleted(int num) {
         Task completedTask = getTask(num);
         completedTask.setNotCompleted();
         STORAGE.saveTasks(rosterList);
     }
 
-    //get the task
+    /**
+     * Helper function to retrieve a task based on its index
+     * @param num
+     * @return int
+     */
     public Task getTask(int num) {
-        return rosterList.get(num - 1);
+        return rosterList.get(num - 1); //actually this should throw an exception
     }
-    //save a task to a hard disk
 
 }

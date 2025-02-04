@@ -1,8 +1,7 @@
 package task;
 
 /*
-A simple subclass of task
-Only prints out the task description
+Task with a description
  */
 public class ToDo extends Task{
 

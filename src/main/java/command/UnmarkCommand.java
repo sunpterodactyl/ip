@@ -4,6 +4,9 @@ import storage.Storage;
 import task.Roster;
 import ui.Ui;
 
+/**
+ * Unmark a task as done based on its index number
+ */
 public class UnmarkCommand extends Command {
     private int num;
 

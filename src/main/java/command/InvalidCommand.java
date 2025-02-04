@@ -3,6 +3,9 @@ import storage.Storage;
 import task.Roster;
 import ui.Ui;
 
+/**
+ * Command execution to handle incorrect user command inputs
+ */
 public class InvalidCommand extends Command {
         public InvalidCommand() {}
 

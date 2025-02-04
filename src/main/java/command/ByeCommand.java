@@ -4,6 +4,9 @@ import storage.Storage;
 import task.Roster;
 import ui.Ui;
 
+/**
+ * Exit Command
+ */
 public class ByeCommand extends Command {
     public ByeCommand() {}
 

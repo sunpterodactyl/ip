@@ -5,6 +5,9 @@ import task.Roster;
 import task.Task;
 import ui.Ui;
 
+/**
+ * Remove a task from the tasklist by citing its index number
+ */
 public class DeleteCommand extends Command {
     private int num;
 

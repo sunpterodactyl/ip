@@ -8,6 +8,9 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Command that takes in input and adds the given task to the taskList
+ */
 public class AddCommand extends Command {
     private final String input;
     public static final Pattern DEADLINE_FORMAT = Pattern.compile("deadline\\s+(.*?)\\s+/by\\s+(.*)");
