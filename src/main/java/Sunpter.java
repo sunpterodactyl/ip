@@ -1,48 +1,46 @@
+import command.Command;
+import exception.SunpterException;
+import parser.Parser;
+import storage.Storage;
+import task.Roster;
+import ui.Ui;
+
 import java.util.Scanner;
 
 public class Sunpter {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    private Storage storage;
+    private Roster roster;
+    private Ui ui;
+    private Parser parser;
 
-        System.out.println(encapsulateInLines(GREETING));
-        Scanner scanner = new Scanner(System.in);
-        Command commandEnum = Command.EMPTY;
-        String input = "";
-        while (true) {
+    public Sunpter() {
+        ui = new Ui();
+        storage = new Storage();
+        try {
+            roster = new Roster(storage.loadTasks());
+        } catch (SunpterException e) {
+            ui.showLoadingError();
+            roster = new Roster();
+        }
+        parser = new Parser();
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                input = scanner.nextLine();
-                if (input == null || input.trim().isEmpty()) {
-                    throw new SunpterException("Empty input. Please enter a valid command.");
-                }
-                String[] inputParts = input.split(" ", 2);
-                String commandInput = inputParts[0].toUpperCase();
-                try {
-                    commandEnum = Command.valueOf(commandInput);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Invalid command. Please enter LIST, TODO, MARK, UNMARK, DEADLINE, EVENT, DELETE, or BYE.");
-                    continue;
-                }
-                if (commandEnum == Command.BYE) {
-                    break;
-                }
-                commandEnum.inputCommand(input);
+                String fullCommand = ui.readCommand();
+                Command c = parser.parseCommand(fullCommand);
+                c.execute(roster, ui, storage);
+                isExit = c.isExit();
             } catch (SunpterException e) {
-                System.out.println(e.getMessage());
+                ui.printMessage("Error try again please");
             }
         }
-        scanner.close();
-        System.out.println(encapsulateInLines(FIN));
     }
-    public static String encapsulateInLines(String str) {
-        String horizontalLine = "____________________________________________________________";
-        return horizontalLine + "\n" + str + "\n" + horizontalLine;
+
+    public static void main(String[] args) {
+        new Sunpter().run();
     }
-    static String GREETING = "Bonjour, je m'appelle Sunpter\n" + "Que puis-je faire pour vous?";
-    static String FIN = "Alors, je suis fatigué. Tu parles trop! À bientôt.";
-    static String taskDone = "Incroyable! Alors cette tâche est finie.";
-    static String taskUnDone = "Alors, cette tâche n'est pas terminée. Essaie plus fort!";
 }
