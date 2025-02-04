@@ -12,7 +12,8 @@ Handles the parsing and the execution of user commands
 according to respective commands called
  */
 public class Parser {
-    private static final Set<String> VALID_COMMANDS = Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED");
+    private static final Set<String> VALID_COMMANDS =
+            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH");
 
     public Command parseCommand(String input) throws SunpterException {
         String[] parts = input.trim().split("\\s+", 2);
@@ -30,6 +31,7 @@ public class Parser {
                 case "ADD" -> new AddCommand(removeFirstWord(input));
                 case "LIST" -> new ListCommand();
                 case "STARTED" -> new InProgressCommand(getNumber(input));
+                case "SEARCH" -> new SearchCommand(removeFirstWord(input));
                 default -> new InvalidCommand();
             };
         } catch (SunpterException e) {

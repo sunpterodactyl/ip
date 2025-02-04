@@ -78,10 +78,26 @@ public class Roster {
     /**
      * Helper function to retrieve a task based on its index
      * @param num
-     * @return int
+     * @return Task
      */
     public Task getTask(int num) {
         return rosterList.get(num - 1); //actually this should throw an exception
+    }
+
+    /**
+     * Finds all tasks whose descriptions contain the given keyword.
+     * @param keyword The word to search for in task descriptions.
+     * @return A list of tasks that match the keyword.
+     */
+    public ArrayList<Task> findTaskWithKeyword(String keyword) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        keyword = keyword.toLowerCase();
+        for (Task task : rosterList) {
+            if (task.getDescription().toLowerCase().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
     }
 
 }
