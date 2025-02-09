@@ -5,14 +5,14 @@ import task.Roster;
 import ui.Ui;
 
 /**
- * Exit Command
+ * Exits the chatbot
  */
 public class ByeCommand extends Command {
     public ByeCommand() {}
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
-        ui.endMessage();
+    public String execute(Roster roster, Ui ui, Storage storage) {
+        return ui.endMessage();
     }
 
     @Override

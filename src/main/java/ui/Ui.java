@@ -3,30 +3,20 @@ package ui;
 import task.Roster;
 import task.Task;
 
-import java.util.Scanner;
 
 /**
- * The Ui class handles user interactions by printing formatted messages to the console.
+ * The Ui class handles user interactions by returning formatted messages to the Sunpter main class.
  */
 public class Ui {
 
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String GREETING = "Bonjour, je m'appelle Sunpter\nQue puis-je faire pour vous?";
+    private static final String GREETING = "Bonjour, je m'appelle sunpter.Sunpter\nQue puis-je faire pour vous?";
     private static final String FIN = "Alors, je suis fatigué. Tu parles trop! À bientôt.";
     private static final String TASK_DONE = "Incroyable! Alors cette tâche est finie.";
     private static final String TASK_UNDONE = "Alors, cette tâche n'est pas terminée. Essaie plus fort!";
-    private Scanner scanner;
 
     public Ui() {
-        scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Reads user commands
-     */
-    public String readCommand() {
-        System.out.print("Enter command: ");
-        return scanner.nextLine().trim();
+        //scanner = new Scanner(System.in);
     }
 
     /**
@@ -35,17 +25,16 @@ public class Ui {
      * @param message The message to be printed.
      * @return The formatted message.
      */
-    public void printMessage(String message) {
-        System.out.println(encapsulateInLines(message));
+    public String printMessage(String message) {
+        return encapsulateInLines(message);
     }
 
     /**
      * Prints the welcome message.
      */
-    public void showWelcome() {
-        System.out.println(GREETING);
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Translation: Hi my name is Sunpter, how can I help?");
+    public static String showWelcome() {
+        return GREETING + "\n" + HORIZONTAL_LINE + "\n" +
+        "Translation: Hi my name is Sunpter, how can I help?";
     }
 
     /**
@@ -59,36 +48,36 @@ public class Ui {
     }
 
     /**
-     * Prints a message indicating a task has been removed.
+     * Returns a message indicating a task has been removed.
      *
      * @param task   The task to be removed.
      * @param roster The roster from which the task is removed.
      */
-    public void removeTaskMessage(Task task, Roster roster) {
-        System.out.println(encapsulateInLines("removed" +
+    public String removeTaskMessage(Task task, Roster roster) {
+        return encapsulateInLines("removed" +
                 "\n" + task.toString() + "\n" +
-                "Now you have " + roster.numberofTasks() + " tasks in the list."));
+                "Now you have " + roster.numberofTasks() + " tasks in the list.");
     }
 
     /**
-     * Prints a message indicating a task has been marked as uncompleted.
+     * Returns a message indicating a task has been marked as uncompleted.
      *
      * @param roster The roster containing the task.
      * @param number The index of the task.
      */
-    public void markAsUncompleted(Roster roster, int number) {
-        System.out.println(encapsulateInLines(TASK_UNDONE + "\n" + roster.getTask(number).toString()));
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Translation: This task isn't completed. Keep trying!");
+    public String markAsUncompleted(Roster roster, int number) {
+        return encapsulateInLines(TASK_UNDONE + "\n" + roster.getTask(number).toString()) +
+        "\n" + HORIZONTAL_LINE +
+        "\n" + "Translation: This task isn't completed. Keep trying!";
     }
 
     /**
      * Prints the exit message.
      */
-    public void endMessage() {
-        System.out.println(encapsulateInLines(FIN));
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Translation: You talk too much anyways - until next time.");
+    public String endMessage() {
+        return encapsulateInLines(FIN) + "\n"
+        + HORIZONTAL_LINE + "\n"
+        + "Translation: You talk too much anyways - until next time.";
     }
 
     /**
@@ -97,10 +86,10 @@ public class Ui {
      * @param roster The roster containing the task.
      * @param number The index of the task.
      */
-    public void markAsCompleted(Roster roster, int number) {
-        System.out.println(encapsulateInLines(TASK_DONE + "\n" + roster.getTask(number).toString()));
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Translation: Great - this task is done!");
+    public String markAsCompleted(Roster roster, int number) {
+        return encapsulateInLines(TASK_DONE + "\n" + roster.getTask(number).toString()) +
+        "\n" + HORIZONTAL_LINE +
+        "\n" + "Translation: Great - this task is done!";
     }
 
     /**
@@ -108,16 +97,15 @@ public class Ui {
      *
      * @param formatting The correct formatting required.
      */
-    public void incorrectFormattingError(String formatting) {
-        System.out.println(encapsulateInLines("Wrong format! This command should follow " + formatting));
+    public String incorrectFormattingError(String formatting) {
+        return encapsulateInLines("Wrong format! This command should follow " + formatting);
     }
 
     /**
      * Prints a message when a task does not exist.
      */
-    public void taskDoesNotExist() {
-
-        System.out.println(encapsulateInLines("This task doesn't exist!"));
+    public String taskDoesNotExist() {
+        return encapsulateInLines("This task doesn't exist!");
     }
 
     /**
@@ -126,17 +114,17 @@ public class Ui {
      * @param task       The task that was added.
      * @param rosterSize The current size of the roster.
      */
-    public void showTaskAddedMessage(Task task, int rosterSize) {
+    public String showTaskAddedMessage(Task task, int rosterSize) {
         String taskAdded = "Got it. I've added this task:" +
                 "\n" + task.toString() + "\n" +
                 "Now you have " + rosterSize + " tasks in the list.";
-        System.out.println(encapsulateInLines(taskAdded));
+        return encapsulateInLines(taskAdded);
     }
 
     /**
      * Shows and explains that the storage is not able to load any tasks
      */
-    public void showLoadingError() {
-        System.out.println("Error: Unable to load tasks from storage. Starting with an empty task list.");
+    public String showLoadingError() {
+        return "Error: Unable to load tasks from storage. Starting with an empty task list.";
     }
 }

@@ -1,7 +1,6 @@
 package task;
-/*
-This class helps keep encapsulate and update a list of tasks
-CRUD operations
+/**
+ * A tasklist to manage task operations
  */
 import storage.Storage;
 import java.util.ArrayList;
@@ -76,9 +75,9 @@ public class Roster {
     }
 
     /**
-     * Helper function to retrieve a task based on its index
+     * Retrieves a task based on its index
      * @param num
-     * @return Task
+     * @return a task at index num
      */
     public Task getTask(int num) {
         return rosterList.get(num - 1); //actually this should throw an exception

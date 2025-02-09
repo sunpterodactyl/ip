@@ -16,8 +16,8 @@ public class InProgressCommand extends Command {
     }
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(Roster roster, Ui ui, Storage storage) {
         roster.markTaskAsUncompleted(num);
-        ui.markAsUncompleted(roster,num);
+        return ui.markAsUncompleted(roster,num);
     }
 }

@@ -25,4 +25,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + getStatusIcon() + " " + getDescription() + "(by: " + deadline.format(formatFormatter) +")";
     }
+
+    @Override
+    public String toStorageString() {
+        return "[D]" + getDescription()  + deadline;
+    }
 }

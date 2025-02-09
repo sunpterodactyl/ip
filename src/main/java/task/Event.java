@@ -29,4 +29,9 @@ public class Event extends Task {
         return "[E]" + getStatusIcon() + " " + getDescription() +
                 "(from: " + start.format(formatFormatter) + " to: "+end.format(formatFormatter) +")";
     }
+
+    @Override
+    public String toStorageString() {
+        return "[E]" + " " + getDescription() + " " + start + " " + end;
+    }
 }

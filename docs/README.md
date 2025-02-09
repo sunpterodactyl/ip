@@ -1,4 +1,4 @@
-# Sunpter User Guide
+# sunpter.Sunpter User Guide
 
 // Update the title above to match the actual product name
 

@@ -5,7 +5,7 @@ import task.Roster;
 import ui.Ui;
 
 /**
- * List all the tasks in the current roster
+ * Lists all the tasks in the current roster
  */
 public class ListCommand extends Command {
 
@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
-        ui.printMessage(roster.printRoster());
+    public String execute(Roster roster, Ui ui, Storage storage) {
+        return ui.printMessage(roster.printRoster());
     }
 }

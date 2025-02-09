@@ -6,7 +6,7 @@ import task.Task;
 import ui.Ui;
 
 /**
- * Remove a task from the tasklist by citing its index number
+ * Removes a task from the tasklist by citing its index number
  */
 public class DeleteCommand extends Command {
     private int num;
@@ -16,13 +16,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(Roster roster, Ui ui, Storage storage) {
         Task task = roster.getTask(num);
         if (task == null) {
-            ui.taskDoesNotExist();
-            return;
+            return ui.taskDoesNotExist();
         }
-        ui.removeTaskMessage(task, roster);
         roster.removeTask(num);
+        return ui.removeTaskMessage(task, roster);
     }
 }

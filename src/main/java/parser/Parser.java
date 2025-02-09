@@ -1,6 +1,16 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.MarkCommand;
+import command.UnmarkCommand;
+import command.ByeCommand;
+import command.DeleteCommand;
+import command.ListCommand;
+import command.Command;
+import command.InProgressCommand;
+import command.InvalidCommand;
+import command.SearchCommand;
+
 import exception.SunpterException;
 import task.*;
 import ui.Ui;
@@ -40,7 +50,7 @@ public class Parser {
     }
 
     /**
-    Parse the number of the task for commands such as mark, unmark, and delete.
+    Parses the number of the task for commands such as mark, unmark, and delete.
      Handle the Numberformat and Indexoutofbounds exception
      @param input
      @return valid task number
@@ -53,8 +63,6 @@ public class Parser {
 
     /**
      * Removes the first word, specifically for the add command
-     * @param str
-     * @return str
      */
     public static String removeFirstWord(String str) {
         int firstSpace = str.indexOf(" ");

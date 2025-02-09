@@ -34,6 +34,7 @@ public abstract class Task {
     } //not in use yet
 
     public void setNotCompleted() {
+
         this.status = status.UNFINISHED;
     }
 
@@ -43,6 +44,11 @@ public abstract class Task {
 
     @Override
     public String toString() {
+
         return getStatusIcon() + " " + getDescription();
+    }
+
+    public String toStorageString() {
+        return "";
     }
 }

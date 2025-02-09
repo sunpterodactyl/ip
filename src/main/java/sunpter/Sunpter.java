@@ -1,11 +1,11 @@
+package sunpter;
+
 import command.Command;
 import exception.SunpterException;
 import parser.Parser;
 import storage.Storage;
 import task.Roster;
 import ui.Ui;
-
-import java.util.Scanner;
 
 public class Sunpter {
     private Storage storage;
@@ -19,28 +19,23 @@ public class Sunpter {
         try {
             roster = new Roster(storage.loadTasks());
         } catch (SunpterException e) {
-            ui.showLoadingError();
             roster = new Roster();
         }
         parser = new Parser();
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
+    public String getResponse(String input) {
+        String response = "";
             try {
-                String fullCommand = ui.readCommand();
-                Command c = parser.parseCommand(fullCommand);
-                c.execute(roster, ui, storage);
-                isExit = c.isExit();
-            } catch (SunpterException e) {
-                ui.printMessage("Error try again please");
+                Command c = parser.parseCommand(input);
+                if (c == null) {
+                    throw new SunpterException("Invalid command");
+                }
+                return c.execute(roster, ui, storage);
+            }
+            catch (SunpterException e) {
+                return e.getMessage();
             }
         }
-    }
 
-    public static void main(String[] args) {
-        new Sunpter().run();
-    }
 }

@@ -5,7 +5,7 @@ import task.Roster;
 import ui.Ui;
 
 /**
- * Unmark a task as done based on its index number
+ * Unmarks a task as done based on its index number
  */
 public class UnmarkCommand extends Command {
     private final int num;
@@ -15,8 +15,8 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(Roster roster, Ui ui, Storage storage) {
         roster.markTaskAsUncompleted(num);
-        ui.markAsUncompleted(roster,num);
+        return ui.markAsUncompleted(roster,num);
     }
 }

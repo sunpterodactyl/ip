@@ -1,5 +1,4 @@
 package command;
-//TODO: update exception handling
 import storage.Storage;
 import task.*;
 import ui.Ui;
@@ -20,20 +19,18 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
-    /**
-     * Execute function
-     */
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(Roster roster, Ui ui, Storage storage) {
         try {
             Task task = createTask(input, ui);
             if (task != null) {
-                roster.addTask(task); //automatically saves task hmmm..bad design?
-                ui.showTaskAddedMessage(task, roster.numberofTasks());
+                roster.addTask(task);
+                return ui.showTaskAddedMessage(task, roster.numberofTasks());
             }
+            return ui.incorrectFormattingError("Task could not be added"); //STUB
         }
         catch (NullPointerException e) {
-            ui.incorrectFormattingError("This task command is incorrect.");
+            return ui.incorrectFormattingError("This task command is incorrect.");
         }
     }
 
@@ -42,7 +39,6 @@ public class AddCommand extends Command {
      * @param input
      * @return Task object: deadline, event or todo
      */
-    //throws formatting exception
     private Task createTask(String input, Ui ui) {
         String cmd = input.split(" ")[0];
         try {
@@ -63,19 +59,9 @@ public class AddCommand extends Command {
             return null;
         }
     }
-    /*
-    private void projectCommand(String input, Roster roster) {
-
-    }
-    */
-    //String parsing
 
     /**
      * Returns a string array with the parsed parameters for a deadline class
-     * @param input
-     * @param ui
-     * @param pattern
-     * @return
      */
     private String[] getDeadline(String input, Ui ui, Pattern pattern) {
         String item="";
@@ -92,17 +78,13 @@ public class AddCommand extends Command {
 
     /**
      * Returns a string array for the creation of an event class
-     * @param input
-     * @param ui
-     * @param pattern
-     * @return
      */
     private String[] getStartAndEndDate (String input, Ui ui, Pattern pattern) {
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
-            String nameAndDescription = matcher.group(1);  // Extracts name and description
-            String dateStart = matcher.group(2);  // Extracts start date
+            String nameAndDescription = matcher.group(1);
+            String dateStart = matcher.group(2);
             String dateEnd = matcher.group(3);
             return new String[]{nameAndDescription, dateStart, dateEnd};
         } else {

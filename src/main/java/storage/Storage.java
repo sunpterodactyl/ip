@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Stores tasks
+ */
 public class Storage {
     private static final String FILE_PATH = "./data/sunpter.txt";
 
@@ -22,7 +25,7 @@ public class Storage {
             FileWriter writer = new FileWriter(file);
 
             for (Task task : tasks) {
-                writer.write(task.toString() + System.lineSeparator());
+                writer.write(task.toStorageString() + System.lineSeparator());
             }
             writer.close();
         } catch (IOException e) {

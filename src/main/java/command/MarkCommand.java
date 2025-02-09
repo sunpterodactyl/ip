@@ -15,8 +15,8 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(Roster roster, Ui ui, Storage storage) {
         roster.markTaskAsCompleted(num);
-        ui.markAsCompleted(roster,num);
+        return ui.markAsCompleted(roster,num);
     }
 }
