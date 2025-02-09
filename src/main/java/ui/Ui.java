@@ -28,6 +28,7 @@ public class Ui {
         System.out.print("Enter command: ");
         return scanner.nextLine().trim();
     }
+
     /**
      * Prints a formatted message with horizontal lines.
      *
@@ -42,7 +43,9 @@ public class Ui {
      * Prints the welcome message.
      */
     public void showWelcome() {
-        System.out.println(encapsulateInLines(GREETING));
+        System.out.println(GREETING);
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Translation: Hi my name is Sunpter, how can I help?");
     }
 
     /**
@@ -62,7 +65,7 @@ public class Ui {
      * @param roster The roster from which the task is removed.
      */
     public void removeTaskMessage(Task task, Roster roster) {
-        System.out.println(encapsulateInLines(
+        System.out.println(encapsulateInLines("removed" +
                 "\n" + task.toString() + "\n" +
                 "Now you have " + roster.numberofTasks() + " tasks in the list."));
     }
@@ -75,6 +78,8 @@ public class Ui {
      */
     public void markAsUncompleted(Roster roster, int number) {
         System.out.println(encapsulateInLines(TASK_UNDONE + "\n" + roster.getTask(number).toString()));
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Translation: This task isn't completed. Keep trying!");
     }
 
     /**
@@ -82,6 +87,8 @@ public class Ui {
      */
     public void endMessage() {
         System.out.println(encapsulateInLines(FIN));
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Translation: You talk too much anyways - until next time.");
     }
 
     /**
@@ -92,6 +99,8 @@ public class Ui {
      */
     public void markAsCompleted(Roster roster, int number) {
         System.out.println(encapsulateInLines(TASK_DONE + "\n" + roster.getTask(number).toString()));
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Translation: Great - this task is done!");
     }
 
     /**
@@ -107,6 +116,7 @@ public class Ui {
      * Prints a message when a task does not exist.
      */
     public void taskDoesNotExist() {
+
         System.out.println(encapsulateInLines("This task doesn't exist!"));
     }
 
@@ -122,6 +132,7 @@ public class Ui {
                 "Now you have " + rosterSize + " tasks in the list.";
         System.out.println(encapsulateInLines(taskAdded));
     }
+
     /**
      * Shows and explains that the storage is not able to load any tasks
      */
