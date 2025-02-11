@@ -59,9 +59,9 @@ public class GUIWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        Command response = parser.parseCommand(input);
+        //Command response = parser.parseCommand(input);
         String displayResponse = sunpter.getResponse(input);
-        if(response instanceof ByeCommand) {
+        if(input.startsWith("bye")) {
             System.exit(0);
         }
         dialogContainer.getChildren().addAll(

@@ -8,15 +8,12 @@ import task.Task;
  * The Ui class handles user interactions by returning formatted messages to the Sunpter main class.
  */
 public class Ui {
-
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static final String GREETING = "Bonjour, je m'appelle sunpter.Sunpter\nQue puis-je faire pour vous?";
     private static final String FIN = "Alors, je suis fatigué. Tu parles trop! À bientôt.";
     private static final String TASK_DONE = "Incroyable! Alors cette tâche est finie.";
     private static final String TASK_UNDONE = "Alors, cette tâche n'est pas terminée. Essaie plus fort!";
 
     public Ui() {
-        //scanner = new Scanner(System.in);
     }
 
     /**
@@ -26,25 +23,15 @@ public class Ui {
      * @return The formatted message.
      */
     public String printMessage(String message) {
-        return encapsulateInLines(message);
+        return message;
     }
 
     /**
      * Prints the welcome message.
      */
     public static String showWelcome() {
-        return GREETING + "\n" + HORIZONTAL_LINE + "\n" +
+        return GREETING + "\n" +
         "Translation: Hi my name is Sunpter, how can I help?";
-    }
-
-    /**
-     * Encapsulates a string within horizontal lines for better readability.
-     *
-     * @param str The string to be encapsulated.
-     * @return The formatted string with horizontal lines.
-     */
-    public static String encapsulateInLines(String str) {
-        return HORIZONTAL_LINE + "\n" + str + "\n" + HORIZONTAL_LINE;
     }
 
     /**
@@ -54,9 +41,9 @@ public class Ui {
      * @param roster The roster from which the task is removed.
      */
     public String removeTaskMessage(Task task, Roster roster) {
-        return encapsulateInLines("removed" +
+        return "removed" +
                 "\n" + task.toString() + "\n" +
-                "Now you have " + roster.numberofTasks() + " tasks in the list.");
+                "Now you have " + roster.numberofTasks() + " tasks in the list.";
     }
 
     /**
@@ -66,8 +53,7 @@ public class Ui {
      * @param number The index of the task.
      */
     public String markAsUncompleted(Roster roster, int number) {
-        return encapsulateInLines(TASK_UNDONE + "\n" + roster.getTask(number).toString()) +
-        "\n" + HORIZONTAL_LINE +
+        return TASK_UNDONE + "\n" + roster.getTask(number).toString() +
         "\n" + "Translation: This task isn't completed. Keep trying!";
     }
 
@@ -75,8 +61,7 @@ public class Ui {
      * Prints the exit message.
      */
     public String endMessage() {
-        return encapsulateInLines(FIN) + "\n"
-        + HORIZONTAL_LINE + "\n"
+        return FIN +  "\n"
         + "Translation: You talk too much anyways - until next time.";
     }
 
@@ -87,8 +72,7 @@ public class Ui {
      * @param number The index of the task.
      */
     public String markAsCompleted(Roster roster, int number) {
-        return encapsulateInLines(TASK_DONE + "\n" + roster.getTask(number).toString()) +
-        "\n" + HORIZONTAL_LINE +
+        return TASK_DONE + "\n" + roster.getTask(number).toString()+
         "\n" + "Translation: Great - this task is done!";
     }
 
@@ -98,14 +82,14 @@ public class Ui {
      * @param formatting The correct formatting required.
      */
     public String incorrectFormattingError(String formatting) {
-        return encapsulateInLines("Wrong format! This command should follow " + formatting);
+        return"Wrong format! This command should follow " + formatting;
     }
 
     /**
      * Prints a message when a task does not exist.
      */
     public String taskDoesNotExist() {
-        return encapsulateInLines("This task doesn't exist!");
+        return "This task doesn't exist!";
     }
 
     /**
@@ -118,7 +102,7 @@ public class Ui {
         String taskAdded = "Got it. I've added this task:" +
                 "\n" + task.toString() + "\n" +
                 "Now you have " + rosterSize + " tasks in the list.";
-        return encapsulateInLines(taskAdded);
+        return taskAdded;
     }
 
     /**

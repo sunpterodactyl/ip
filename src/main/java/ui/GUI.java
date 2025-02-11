@@ -7,12 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sunpter.Sunpter;
-/*
-import org.example.MainWindow;
-import org.example.sunpter.Sunpter;
-
- */
-
 /**
  * A GUI for Duke using FXML.
  */
@@ -23,7 +17,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("/view/GUIWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setMinHeight(220);
