@@ -17,7 +17,7 @@ public class InProgressCommand extends Command {
 
     @Override
     public String execute(Roster roster, Ui ui, Storage storage) {
-        if(num < 1 || num > roster.numberofTasks()) {
+        if(num < 1 || num > roster.numberOfTasks()) {
             throw new IndexOutOfBoundsException();
         }
         roster.markTaskAsUncompleted(num);

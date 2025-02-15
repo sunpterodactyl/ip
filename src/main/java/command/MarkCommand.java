@@ -17,9 +17,9 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(Roster roster, Ui ui, Storage storage) {
-        if (num < 1 || num > roster.numberofTasks()) {
+        if (num < 1 || num > roster.numberOfTasks()) {
             throw new IndexOutOfBoundsException("Please input a valid task number between 1 and "
-                                            + (roster.numberofTasks()));
+                                            + (roster.numberOfTasks()));
         }
         roster.markTaskAsCompleted(num);
         return ui.markAsCompleted(roster,num);
