@@ -15,6 +15,8 @@ import sunpter.Sunpter;
 import static ui.DialogBox.getSunpterDialog;
 import parser.Parser;
 
+import java.util.Objects;
+
 /**
  * Controller for the main GUI.
  */
@@ -30,8 +32,10 @@ public class GUIWindow extends AnchorPane {
     private Sunpter sunpter;
     private final Parser parser = new Parser();
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/prison_mike.jpg"));
-    private final Image sunpterImage = new Image(this.getClass().getResourceAsStream("/images/sunpter.png"));
+    private final Image userImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/prison_mike.jpg")));
+    private final Image sunpterImage =
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/sunpter.png")));
 
     @FXML
     public void initialize() {
@@ -50,12 +54,6 @@ public class GUIWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing sunpter.Sunpter's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    //Completable Future
-    /*
-    CompletableFuture.supplyAsync(() -> sunpter.getResponse(input))
-            .thenAccept(response -> Platform.runLater(() ->
-    addToDialog(DialogBox.getSunpterDialog(response, dukeImage))));
-    */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
