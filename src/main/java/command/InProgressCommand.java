@@ -5,8 +5,8 @@ import task.Roster;
 import ui.Ui;
 
 /**
- * Unmark a task as in progress based on its index number
- * Uses command started for simpler parsing
+ * Mark a task as in progress based on its index number
+ * Uses command "started" for simpler parsing
  */
 public class InProgressCommand extends Command {
     private final int num;
@@ -17,6 +17,9 @@ public class InProgressCommand extends Command {
 
     @Override
     public String execute(Roster roster, Ui ui, Storage storage) {
+        if(num < 1 || num > roster.numberofTasks()) {
+            throw new IndexOutOfBoundsException();
+        }
         roster.markTaskAsUncompleted(num);
         return ui.markAsUncompleted(roster,num);
     }
