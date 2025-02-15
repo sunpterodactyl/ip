@@ -21,7 +21,9 @@ public class SearchCommand extends Command {
     public String execute(Roster roster, Ui ui, Storage storage) {
         ArrayList<Task> match = roster.findTaskWithKeyword(keyword);
         Roster searchRoster = new Roster(match);
+        if(searchRoster.numberOfTasks() == 0) {
+            return "Sorry :( , no tasks found for keyword: " + keyword;
+        }
         return ui.printMessage("Here are the matching tasks in your list:\n" + searchRoster.printRoster());
     }
-
 }

@@ -1,8 +1,9 @@
 package command;
+import exception.SunpterException;
 import storage.Storage;
 import task.*;
 import ui.Ui;
-
+//TODO: Parsing exception handling here
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,9 +26,9 @@ public class AddCommand extends Command {
             Task task = createTask(input, ui);
             if (task != null) {
                 roster.addTask(task);
-                return ui.showTaskAddedMessage(task, roster.numberofTasks());
+                return ui.showTaskAddedMessage(task, roster.numberOfTasks());
             }
-            return ui.incorrectFormattingError("Task could not be added"); //STUB
+            return ui.incorrectFormattingError("Task could not be added");
         }
         catch (NullPointerException e) {
             return ui.incorrectFormattingError("This task command is incorrect.");
@@ -52,7 +53,7 @@ public class AddCommand extends Command {
                     yield new Event(eventDeadline[0], eventDeadline[1], eventDeadline[2]);
                 }
                 case ("todo") -> new ToDo(input.split(" ", 2)[1].trim());
-                default -> null;
+                default -> throw new SunpterException("Task command should be add {todo/deadline/event}");
             };
         } catch (DateTimeParseException e) {
             ui.incorrectFormattingError("Please use the correct date format");
@@ -71,7 +72,7 @@ public class AddCommand extends Command {
             item = matcher.group(1);
             date = matcher.group(2);
         } else {
-            ui.incorrectFormattingError("The deadline format should be: deadline {item} /by {date}");
+            throw new SunpterException("The deadline format should be: deadline {item} /by {date}");
         }
         return new String[]{item, date} ;
     }
@@ -88,8 +89,7 @@ public class AddCommand extends Command {
             String dateEnd = matcher.group(3);
             return new String[]{nameAndDescription, dateStart, dateEnd};
         } else {
-            ui.incorrectFormattingError("evnt formatting: event {item} /from {date} /to{date}");
-            return null;
+            throw new SunpterException("event formatting: event {item} /from {date} /to{date}");
         }
     }
 }

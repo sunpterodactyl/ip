@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public String execute(Roster roster, Ui ui, Storage storage) {
         Task task = roster.getTask(num);
         if (task == null) {
-            return ui.taskDoesNotExist();
+            return ui.taskDoesNotExist("");//STUB
         }
         roster.removeTask(num);
         return ui.removeTaskMessage(task, roster);
