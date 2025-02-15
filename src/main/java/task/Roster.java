@@ -1,11 +1,13 @@
 package task;
-/**
- * A tasklist to manage task operations
- */
+
 import exception.SunpterException;
 import storage.Storage;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+/**
+ * Manages task operations
+ */
 public class Roster {
     protected ArrayList<Task> rosterList;
     private static Storage STORAGE = new Storage();
@@ -22,7 +24,7 @@ public class Roster {
      * Return the number of tasks in the roster
      * @return int
      */
-    public int numberofTasks() {
+    public int numberOfTasks() {
         return rosterList.size();
     }
 
@@ -91,11 +93,10 @@ public class Roster {
 
     /**
      * Retrieves a task based on its index
-     * @param num
      * @return a task at index num
      */
     public Task getTask(int num) {
-        return rosterList.get(num - 1);
+        return rosterList.get(num-1);
     }
 
     /**
@@ -105,15 +106,9 @@ public class Roster {
      * @return A list of tasks that match the keyword.
      */
     public ArrayList<Task> findTaskWithKeyword(String keyword) {
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        keyword = keyword.toLowerCase();
-        for (Task task : rosterList) {
-            assert task != null && rosterList != null;
-            if (task.getDescription().toLowerCase().contains(keyword)) {
-                matchedTasks.add(task);
-            }
-        }
-        return matchedTasks;
+        assert keyword != null;
+        return rosterList.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
-
 }

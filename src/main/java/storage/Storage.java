@@ -1,7 +1,7 @@
 package storage;
 
 import task.Task;
-
+// add assertions
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Storage {
     public Storage() {}
 
     /**
-     * Save tasks into a file
+     * Saves tasks into a file
      * @param tasks
      */
     public void saveTasks(ArrayList<Task> tasks) {
@@ -34,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * Read saved tasks from the file sunpter.txt and loads it into the chatbot
+     * Reads saved tasks from the file sunpter.txt and loads it into the chatbot
      * @return ArrayList<Task>
      */
     public ArrayList<Task> loadTasks() {

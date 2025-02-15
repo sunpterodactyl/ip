@@ -43,7 +43,7 @@ public class Ui {
     public String removeTaskMessage(Task task, Roster roster) {
         return "removed" +
                 "\n" + task.toString() + "\n" +
-                "Now you have " + roster.numberofTasks() + " tasks in the list.";
+                "Now you have " + roster.numberOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -81,15 +81,15 @@ public class Ui {
      *
      * @param formatting The correct formatting required.
      */
-    public String incorrectFormattingError(String formatting) {
+    public static String incorrectFormattingError(String formatting) {
         return"Wrong format! This command should follow " + formatting;
     }
 
     /**
      * Prints a message when a task does not exist.
      */
-    public String taskDoesNotExist() {
-        return "This task doesn't exist!";
+    public String taskDoesNotExist(String message) {
+        return "This task doesn't exist!" + "\n" + message;
     }
 
     /**

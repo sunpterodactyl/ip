@@ -18,11 +18,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(Roster roster, Ui ui, Storage storage) {
-        if (num < 1 || num > roster.numberofTasks()) {
-            throw new IndexOutOfBoundsException("Please input a task number between 1 and " +
-                                            (roster.numberofTasks()));
-        }
         Task task = roster.getTask(num);
+        if (task == null) {
+            return ui.taskDoesNotExist("");//STUB
+        }
         roster.removeTask(num);
         return ui.removeTaskMessage(task, roster);
     }

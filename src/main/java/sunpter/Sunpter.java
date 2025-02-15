@@ -26,16 +26,15 @@ public class Sunpter {
 
     public String getResponse(String input) {
         String response = "";
-            try {
-                Command c = parser.parseCommand(input);
-                if (c == null) {
-                    throw new SunpterException("Invalid command");
-                }
-                return c.execute(roster, ui, storage);
+        try {
+            Command c = parser.parseCommand(input);
+            if (c == null) {
+                throw new SunpterException("Invalid command");
             }
-            catch (SunpterException e) {
-                return e.getMessage();
-            }
+            return c.execute(roster, ui, storage);
         }
-
+        catch (SunpterException | IndexOutOfBoundsException e) {
+            return e.getMessage();
+        }
+    }
 }

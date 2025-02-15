@@ -12,14 +12,11 @@ import command.InvalidCommand;
 import command.SearchCommand;
 
 import exception.SunpterException;
-import task.*;
 import ui.Ui;
-import storage.Storage;
 
 import java.util.Set;
-/*
-Handles the parsing and the execution of user commands
-according to respective commands called
+/**
+Handles the parsing and the execution of user commands according to user input
  */
 public class Parser {
     private static final Set<String> VALID_COMMANDS =
@@ -51,8 +48,7 @@ public class Parser {
 
     /**
     Parses the number of the task for commands such as mark, unmark, and delete.
-     Handle the Numberformat and Indexoutofbounds exception
-     @param input
+     Handles the Numberformat exception
      @return valid task number
      */
     private int getNumber(String input) throws NumberFormatException {
@@ -65,7 +61,16 @@ public class Parser {
      * Removes the first word, specifically for the add command
      */
     public static String removeFirstWord(String str) {
-        int firstSpace = str.indexOf(" ");
-        return str.substring(firstSpace + 1);
+        try {
+            int firstSpace = str.indexOf(" ");
+            String keyword = str.substring(firstSpace + 1);
+            if (keyword.isEmpty()) {
+                throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
+            }
+            return keyword;
+        }
+        catch (SunpterException e) {
+            return Ui.incorrectFormattingError(e.getMessage());
+        }
     }
 }

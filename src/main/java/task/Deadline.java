@@ -5,7 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
-Deadline type of class has a due date
+Deadline type of task
+ Has a due date
  */
 public class Deadline extends Task {
     protected LocalDateTime deadline;
