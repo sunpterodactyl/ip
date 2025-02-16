@@ -3,20 +3,22 @@ package task;
 import exception.SunpterException;
 import storage.Storage;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
  * Manages task operations
  */
-public class Roster {
+public class PriorityRoster {
     protected ArrayList<Task> rosterList;
     private static Storage STORAGE = new Storage();
 
-    public Roster(ArrayList<Task> rosterList) {
+    public PriorityRoster(ArrayList<Task> rosterList) {
         this.rosterList = (rosterList == null) ? new ArrayList<>() : rosterList;
     }
 
-    public Roster() {
+    //prepare to remove this
+    public PriorityRoster() {
         this.rosterList = new ArrayList<>();
     }
 
@@ -65,6 +67,7 @@ public class Roster {
         if(index < 1 || index > rosterList.size()){
             throw new IndexOutOfBoundsException("Task index out of bounds");
         }
+        Task removedTask = getTask(index);
         rosterList.remove(index - 1);
         STORAGE.saveTasks(rosterList);
     }
@@ -110,5 +113,35 @@ public class Roster {
         return rosterList.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public String printPriorityTask() {
+        TreeSet<Task> priorityList = getTasksPriorityQueue();
+        if(priorityList.isEmpty()){
+            return "Empty Roster";
+        }
+        else {
+            StringBuilder sb = new StringBuilder("Here are the ordered tasks in your roster:\n");
+            int taskIndex = 1;
+            for (Task task : priorityList) {
+                sb.append("\n" + taskIndex + ". " + task.toString());
+                taskIndex++;
+            }
+            return sb.toString();
+        }
+    }
+
+    public TreeSet<Task> getTasksPriorityQueue() {
+        TreeSet<Task> priorityList = new TreeSet<>((a,b) -> {
+            if (a.getPriority() > b.getPriority()) {
+                return Long.compare(a.getPriority(), b.getPriority());
+            }
+            return Integer.compare(b.getTaskID(), a.getTaskID());
+        });
+
+        for(Task task : rosterList){
+            priorityList.add(task);
+        }
+        return priorityList;
     }
 }
