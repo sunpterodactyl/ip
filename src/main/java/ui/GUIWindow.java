@@ -2,6 +2,8 @@ package ui;
 
 import command.ByeCommand;
 import command.Command;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import storage.Storage;
 import sunpter.Sunpter;
 
@@ -64,7 +67,9 @@ public class GUIWindow extends AnchorPane {
         );
         userInput.clear();
         if(input.startsWith("bye")) {
-            System.exit(0);
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         }
     }
 }
