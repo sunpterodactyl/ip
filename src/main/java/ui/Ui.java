@@ -8,10 +8,10 @@ import task.Task;
  * The Ui class handles user interactions by returning formatted messages to the Sunpter main class.
  */
 public class Ui {
-    private static final String GREETING = "Bonjour, je m'appelle sunpter.Sunpter\nQue puis-je faire pour vous?";
-    private static final String FIN = "Alors, je suis fatigué. Tu parles trop! À bientôt.";
-    private static final String TASK_DONE = "Incroyable! Alors cette tâche est finie.";
-    private static final String TASK_UNDONE = "Alors, cette tâche n'est pas terminée. Essaie plus fort!";
+    private static final String GREETING = "Hi, I'm Sunpter I help you prioritise. Type help to get my user guide.";
+    private static final String FIN = "Ok bye.";
+    private static final String TASK_DONE = "Incredible! This task is completed!";
+    private static final String TASK_UNDONE = "Unmarked. Keep trying!";
 
     public Ui() {
     }
@@ -53,16 +53,14 @@ public class Ui {
      * @param number The index of the task.
      */
     public String markAsUncompleted(PriorityRoster roster, int number) {
-        return TASK_UNDONE + "\n" + roster.getTask(number).toString() +
-        "\n" + "Translation: This task isn't completed. Keep trying!";
+        return TASK_UNDONE + "\n" + roster.getTask(number).toString();
     }
 
     /**
      * Prints the exit message.
      */
     public String endMessage() {
-        return FIN +  "\n"
-        + "Translation: You talk too much anyways - until next time.";
+        return FIN;
     }
 
     /**
@@ -72,8 +70,7 @@ public class Ui {
      * @param number The index of the task.
      */
     public String markAsCompleted(PriorityRoster roster, int number) {
-        return TASK_DONE + "\n" + roster.getTask(number).toString()+
-        "\n" + "Translation: Great - this task is done!";
+        return TASK_DONE + "\n" + roster.getTask(number).toString();
     }
 
     /**
