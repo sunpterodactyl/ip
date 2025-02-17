@@ -5,13 +5,13 @@ Task with a description
  */
 public class ToDo extends Task{
 
-    public ToDo(String name) {
-        super(name);
+    public ToDo(String name, long priority) {
+        super(name, priority);
     }
 
     @Override
     public String toString() {
-        return "[T]" + getStatusIcon() + " " + getDescription();
+        return "[T]" + super.toString();
     }
 
     @Override

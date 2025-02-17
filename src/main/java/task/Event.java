@@ -18,15 +18,15 @@ public class Event extends Task {
         return LocalDateTime.parse(dateStr, formatter);
     }
 
-    public Event(String name, String start, String end) {
-        super(name);
+    public Event(String name, String start, String end, long priority) {
+        super(name, priority);
         this.start = parseDate(start);
         this.end = parseDate(end);
     }
 
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + getDescription() +
+        return "[E]" + super.toString() +
                 "(from: " + start.format(formatFormatter) + " to: "+end.format(formatFormatter) +")";
     }
 
