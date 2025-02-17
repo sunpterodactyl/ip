@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 public class PriorityRoster {
     protected ArrayList<Task> rosterList;
     private static Storage STORAGE = new Storage();
+    private int totalPriorityPoints = 0;
+    private int completedPriorityPoints = 0;
 
     public PriorityRoster(ArrayList<Task> rosterList) {
         this.rosterList = (rosterList == null) ? new ArrayList<>() : rosterList;
@@ -58,6 +60,7 @@ public class PriorityRoster {
             throw new SunpterException("This task cannot be empty");
         }
         rosterList.add(task);
+        totalPriorityPoints += task.getPriority();
         STORAGE.saveTasks(rosterList);
     }
     /**
@@ -69,6 +72,7 @@ public class PriorityRoster {
         }
         Task removedTask = getTask(index);
         rosterList.remove(index - 1);
+        totalPriorityPoints -= removedTask.getPriority();
         STORAGE.saveTasks(rosterList);
     }
 
@@ -80,6 +84,7 @@ public class PriorityRoster {
         Task completedTask = getTask(num);
         assert completedTask != null: "This task should not be null";
         completedTask.setCompleted();
+        completedPriorityPoints += completedTask.getPriority();
         STORAGE.saveTasks(rosterList);
     }
 
@@ -91,6 +96,7 @@ public class PriorityRoster {
         Task uncompletedTask = getTask(num);
         assert uncompletedTask != null: "This task should not be null";
         uncompletedTask.setNotCompleted();
+        completedPriorityPoints -= uncompletedTask.getPriority();
         STORAGE.saveTasks(rosterList);
     }
 
@@ -145,5 +151,13 @@ public class PriorityRoster {
         });
         priorityList.addAll(rosterList);
         return priorityList;
+    }
+
+    public int getTotalPriorityPoints() {
+        return totalPriorityPoints;
+    }
+
+    public int getCompletedPriorityPoints() {
+        return completedPriorityPoints;
     }
 }

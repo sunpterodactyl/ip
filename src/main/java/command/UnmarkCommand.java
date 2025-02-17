@@ -22,6 +22,6 @@ public class UnmarkCommand extends Command {
                         (roster.numberOfTasks()));
         }
         roster.markTaskAsUncompleted(num);
-        return ui.markAsUncompleted(roster,num);
+        return ui.markAsUncompleted(roster,num) + "\n" + ui.priorityPoints(roster);
     }
 }

@@ -10,7 +10,7 @@ Handles the parsing and the execution of user commands according to user input
  */
 public class Parser {
     private static final Set<String> VALID_COMMANDS =
-            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH", "PRIORITY");
+            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH", "PRIORITY", "HELP");
 
     public Command parseCommand(String input) throws SunpterException {
         if(input == null || input.trim().isEmpty()) {
@@ -27,9 +27,9 @@ public class Parser {
                 case "MARK" -> new MarkCommand(getNumber(input));
                 case "ADD" -> new AddCommand(removeFirstWord(input));
                 case "LIST" -> new ListCommand();
-                case "STARTED" -> new InProgressCommand(getNumber(input));
                 case "SEARCH" -> new SearchCommand(removeFirstWord(input));
                 case "PRIORITY" -> new ListPriorityCommand();
+                case "HELP" -> new HelpCommand();
                 default -> new InvalidCommand("Wrong command. This command does not exist\n" +
                         " Please use the following commands:" + "\n" +
                         "mark , unmark, add, delete, list");

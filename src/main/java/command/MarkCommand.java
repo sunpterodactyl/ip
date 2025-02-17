@@ -22,6 +22,6 @@ public class MarkCommand extends Command {
                                             + (roster.numberOfTasks()));
         }
         roster.markTaskAsCompleted(num);
-        return ui.markAsCompleted(roster,num);
+        return ui.markAsCompleted(roster,num) + "\n" + ui.priorityPoints(roster);
     }
 }

@@ -7,7 +7,7 @@ Includes basic features for a task: the task description and status(done or not 
 public abstract class Task {
 
     public enum Status{
-        FINISHED, UNFINISHED, IN_PROGRESS;
+        FINISHED, UNFINISHED;
     }
 
     protected String description;
@@ -40,17 +40,11 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return status == status.FINISHED ? "[X]"
-                                         : status == status.IN_PROGRESS
-                                         ? "[-]"
                                          : "[ ]";
     }
 
     public void setCompleted() {
         this.status = status.FINISHED;
-    }
-
-    public void setInProgress() {
-        this.status = status.IN_PROGRESS;
     }
 
     public void setNotCompleted() {

@@ -108,4 +108,15 @@ public class Ui {
     public String showLoadingError() {
         return "Error: Unable to load tasks from storage. Starting with an empty task list.";
     }
+    /**
+     * Shows the number of priority points earned by completed tasks
+     */
+    public String priorityPoints(PriorityRoster roster) {
+        int completedPoints = roster.getCompletedPriorityPoints();
+        int totalPoints = roster.getTotalPriorityPoints();
+        int percentage = (int) Math.round(((double) completedPoints / totalPoints) * 100);
+        return " You’ve completed " +
+                 completedPoints+ "/" + totalPoints +
+                "priority points " + percentage +". Keep going! 🚀";
+    }
 }
