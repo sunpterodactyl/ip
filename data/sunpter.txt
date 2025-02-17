@@ -1,1 +1,3 @@
-[T] shampoo hair
+[T] eat
+[T] eat
+[T] eat

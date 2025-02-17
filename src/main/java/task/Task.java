@@ -13,23 +13,24 @@ public abstract class Task {
     protected String description;
     protected Status status;
     protected static int taskId = 0;
-    protected long priority;
+    protected int priority;
 
-    public Task(String dsc, long p) {
+    public Task(String dsc, int p) {
         this.description = dsc;
         this.status = Status.UNFINISHED;
         this.taskId = taskId++;
+        this.priority = p;
     }
 
     /**
      * Returns the priority value a.k.a. the number of points a user earns upon task completion
      * @return the priority value of a task
      */
-    public long getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(long p) {
+    public void setPriority(int p) {
         this.priority = p; //not immutable
     }
 

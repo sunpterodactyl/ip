@@ -1,15 +1,6 @@
 package parser;
 
-import command.AddCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-import command.ByeCommand;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.Command;
-import command.InProgressCommand;
-import command.InvalidCommand;
-import command.SearchCommand;
+import command.*;
 
 import exception.SunpterException;
 
@@ -19,7 +10,7 @@ Handles the parsing and the execution of user commands according to user input
  */
 public class Parser {
     private static final Set<String> VALID_COMMANDS =
-            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH");
+            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH", "PRIORITY");
 
     public Command parseCommand(String input) throws SunpterException {
         if(input == null || input.trim().isEmpty()) {
@@ -38,6 +29,7 @@ public class Parser {
                 case "LIST" -> new ListCommand();
                 case "STARTED" -> new InProgressCommand(getNumber(input));
                 case "SEARCH" -> new SearchCommand(removeFirstWord(input));
+                case "PRIORITY" -> new ListPriorityCommand();
                 default -> new InvalidCommand("Wrong command. This command does not exist\n" +
                         " Please use the following commands:" + "\n" +
                         "mark , unmark, add, delete, list");

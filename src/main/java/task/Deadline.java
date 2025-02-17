@@ -12,7 +12,7 @@ public class Deadline extends Task {
     protected LocalDateTime deadline;
     static DateTimeFormatter formatFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Deadline(String name, String deadline, long priority) {
+    public Deadline(String name, String deadline, int priority) {
         super(name, priority);
         this.deadline = parseDate(deadline);
     }

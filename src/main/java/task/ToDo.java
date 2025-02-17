@@ -5,7 +5,7 @@ Task with a description
  */
 public class ToDo extends Task{
 
-    public ToDo(String name, long priority) {
+    public ToDo(String name, int priority) {
         super(name, priority);
     }
 

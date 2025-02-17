@@ -18,7 +18,7 @@ public class Event extends Task {
         return LocalDateTime.parse(dateStr, formatter);
     }
 
-    public Event(String name, String start, String end, long priority) {
+    public Event(String name, String start, String end, int priority) {
         super(name, priority);
         this.start = parseDate(start);
         this.end = parseDate(end);

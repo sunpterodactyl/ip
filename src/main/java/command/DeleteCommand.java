@@ -2,7 +2,7 @@ package command;
 
 import exception.SunpterException;
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import task.Task;
 import ui.Ui;
 
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(PriorityRoster roster, Ui ui, Storage storage) {
         Task task = roster.getTask(num);
         if (task == null) {
             return ui.taskDoesNotExist("");//STUB

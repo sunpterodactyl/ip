@@ -115,6 +115,9 @@ public class PriorityRoster {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Prints an ordered list of tasks from highest to lowest priority
+     */
     public String printPriorityTask() {
         TreeSet<Task> priorityList = getTasksPriorityQueue();
         if(priorityList.isEmpty()){
@@ -131,17 +134,16 @@ public class PriorityRoster {
         }
     }
 
+    /**
+     *Orders tasks by priority
+     * Uses a TreeSet for more efficient ordering
+     */
     public TreeSet<Task> getTasksPriorityQueue() {
-        TreeSet<Task> priorityList = new TreeSet<>((a,b) -> {
-            if (a.getPriority() > b.getPriority()) {
-                return Long.compare(a.getPriority(), b.getPriority());
-            }
-            return Integer.compare(b.getTaskID(), a.getTaskID());
+        TreeSet<Task> priorityList = new TreeSet<>((a, b) -> {
+            int priorityComparison = Integer.compare(b.getPriority(), a.getPriority());
+            return (priorityComparison != 0) ? priorityComparison : Integer.compare(a.getTaskID(), b.getTaskID());
         });
-
-        for(Task task : rosterList){
-            priorityList.add(task);
-        }
+        priorityList.addAll(rosterList);
         return priorityList;
     }
 }
