@@ -30,8 +30,7 @@ public class Ui {
      * Prints the welcome message.
      */
     public static String showWelcome() {
-        return GREETING + "\n" +
-        "Translation: Hi my name is Sunpter, how can I help?";
+        return GREETING;
     }
 
     /**
@@ -117,6 +116,6 @@ public class Ui {
         int percentage = (int) Math.round(((double) completedPoints / totalPoints) * 100);
         return " You’ve completed " +
                  completedPoints+ "/" + totalPoints +
-                "priority points " + percentage +". Keep going! 🚀";
+                "priority points (" + percentage +"%). Keep going! 🚀";
     }
 }

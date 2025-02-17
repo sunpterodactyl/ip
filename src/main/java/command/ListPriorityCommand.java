@@ -6,9 +6,7 @@ import ui.Ui;
 
 public class ListPriorityCommand extends Command {
 
-    public ListPriorityCommand() {
-
-    }
+    public ListPriorityCommand() {}
 
     @Override
     public String execute(PriorityRoster roster, Ui ui, Storage storage) {
