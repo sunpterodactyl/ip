@@ -57,16 +57,15 @@ public class GUIWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        //Command response = parser.parseCommand(input);
         String displayResponse = sunpter.getResponse(input);
-        if(input.startsWith("bye")) {
-            System.exit(0);
-        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 getSunpterDialog(displayResponse, sunpterImage)
         );
         userInput.clear();
+        if(input.startsWith("bye")) {
+            System.exit(0);
+        }
     }
 }
 
