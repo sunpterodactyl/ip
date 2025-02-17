@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import task.Task;
 import ui.Ui;
 
@@ -18,9 +18,9 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public String execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(PriorityRoster roster, Ui ui, Storage storage) {
         ArrayList<Task> match = roster.findTaskWithKeyword(keyword);
-        Roster searchRoster = new Roster(match);
+        PriorityRoster searchRoster = new PriorityRoster(match);
         if(searchRoster.numberOfTasks() == 0) {
             return "Sorry :( , no tasks found for keyword: " + keyword;
         }

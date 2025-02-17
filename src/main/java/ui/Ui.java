@@ -1,6 +1,6 @@
 package ui;
 
-import task.Roster;
+import task.PriorityRoster;
 import task.Task;
 
 
@@ -40,7 +40,7 @@ public class Ui {
      * @param task   The task to be removed.
      * @param roster The roster from which the task is removed.
      */
-    public String removeTaskMessage(Task task, Roster roster) {
+    public String removeTaskMessage(Task task, PriorityRoster roster) {
         return "removed" +
                 "\n" + task.toString() + "\n" +
                 "Now you have " + roster.numberOfTasks() + " tasks in the list.";
@@ -52,7 +52,7 @@ public class Ui {
      * @param roster The roster containing the task.
      * @param number The index of the task.
      */
-    public String markAsUncompleted(Roster roster, int number) {
+    public String markAsUncompleted(PriorityRoster roster, int number) {
         return TASK_UNDONE + "\n" + roster.getTask(number).toString() +
         "\n" + "Translation: This task isn't completed. Keep trying!";
     }
@@ -71,7 +71,7 @@ public class Ui {
      * @param roster The roster containing the task.
      * @param number The index of the task.
      */
-    public String markAsCompleted(Roster roster, int number) {
+    public String markAsCompleted(PriorityRoster roster, int number) {
         return TASK_DONE + "\n" + roster.getTask(number).toString()+
         "\n" + "Translation: Great - this task is done!";
     }

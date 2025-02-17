@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 /**
@@ -16,7 +16,7 @@ public class InProgressCommand extends Command {
     }
 
     @Override
-    public String execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(PriorityRoster roster, Ui ui, Storage storage) {
         if(num < 1 || num > roster.numberOfTasks()) {
             throw new IndexOutOfBoundsException();
         }

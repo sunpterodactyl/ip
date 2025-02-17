@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 /**
@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
     public ByeCommand() {}
 
     @Override
-    public String execute(Roster roster, Ui ui, Storage storage) {
+    public String execute(PriorityRoster priorityRoster, Ui ui, Storage storage) {
         return ui.endMessage();
     }
 

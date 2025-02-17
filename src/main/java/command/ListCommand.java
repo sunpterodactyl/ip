@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 /**
@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(Roster roster, Ui ui, Storage storage) {
-        return ui.printMessage(roster.printRoster());
+    public String execute(PriorityRoster priorityRoster, Ui ui, Storage storage) {
+        return ui.printMessage(priorityRoster.printRoster());
     }
 }

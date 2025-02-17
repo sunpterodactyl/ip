@@ -1,18 +1,19 @@
 package command;
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 /**
  * Handles incorrect user command inputs
  */
 public class InvalidCommand extends Command {
-        public InvalidCommand() {}
+    String message;
+    public InvalidCommand(String message) {
+        this.message = message;
+    }
 
-        @Override
-        public String execute(Roster roster, Ui ui, Storage storage) {
-            return ui.incorrectFormattingError("Wrong command. This command does not exist"
-                                            + "\n Please use the following commands:" +
-                                             "mark , unmark, add, delete, list");
-        }
+    @Override
+    public String execute(PriorityRoster priorityRoster, Ui ui, Storage storage) {
+        return ui.incorrectFormattingError(message);
+    }
 }

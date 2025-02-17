@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 /**
@@ -11,5 +11,5 @@ public abstract class Command {
     public boolean isExit() {
         return false;
     }
-    public abstract String execute(Roster roster, Ui ui, Storage storage);
+    public abstract String execute(PriorityRoster priorityRoster, Ui ui, Storage storage);
 }

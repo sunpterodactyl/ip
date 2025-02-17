@@ -1,18 +1,8 @@
 package parser;
 
-import command.AddCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-import command.ByeCommand;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.Command;
-import command.InProgressCommand;
-import command.InvalidCommand;
-import command.SearchCommand;
+import command.*;
 
 import exception.SunpterException;
-import ui.Ui;
 
 import java.util.Set;
 /**
@@ -20,15 +10,15 @@ Handles the parsing and the execution of user commands according to user input
  */
 public class Parser {
     private static final Set<String> VALID_COMMANDS =
-            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH");
+            Set.of("ADD", "DELETE", "LIST", "MARK", "UNMARK", "BYE", "STARTED","SEARCH", "PRIORITY");
 
     public Command parseCommand(String input) throws SunpterException {
+        if(input == null || input.trim().isEmpty()) {
+            return new InvalidCommand("PLease type in input. See the help command for more");
+        }
         String[] parts = input.trim().split("\\s+", 2);
         String command = parts[0].toUpperCase();
 
-        if (!VALID_COMMANDS.contains(command)) {
-            throw new SunpterException("Incorrect Commmand");
-        }
         try {
             return switch (command) {
                 case "DELETE" -> new DeleteCommand(getNumber(input));
@@ -39,10 +29,13 @@ public class Parser {
                 case "LIST" -> new ListCommand();
                 case "STARTED" -> new InProgressCommand(getNumber(input));
                 case "SEARCH" -> new SearchCommand(removeFirstWord(input));
-                default -> new InvalidCommand();
+                case "PRIORITY" -> new ListPriorityCommand();
+                default -> new InvalidCommand("Wrong command. This command does not exist\n" +
+                        " Please use the following commands:" + "\n" +
+                        "mark , unmark, add, delete, list");
             };
         } catch (SunpterException e) {
-            return new InvalidCommand();
+            return new InvalidCommand(e.getMessage());
         }
     }
 
@@ -59,18 +52,23 @@ public class Parser {
 
     /**
      * Removes the first word, specifically for the add command
+     * @throws SunpterException if the input is invalid
      */
-    public static String removeFirstWord(String str) {
-        try {
-            int firstSpace = str.indexOf(" ");
-            String keyword = str.substring(firstSpace + 1);
-            if (keyword.isEmpty()) {
-                throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
-            }
-            return keyword;
+    public static String removeFirstWord(String str) throws SunpterException {
+        if (str == null || str.trim().isEmpty()) {
+            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
         }
-        catch (SunpterException e) {
-            return Ui.incorrectFormattingError(e.getMessage());
+
+        int firstSpace = str.indexOf(" ");
+        if (firstSpace == -1) {
+            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
         }
+
+        String keyword = str.substring(firstSpace + 1).trim();
+        if (keyword.isEmpty()) {
+            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
+        }
+
+        return keyword;
     }
 }

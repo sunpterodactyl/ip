@@ -12,10 +12,30 @@ public abstract class Task {
 
     protected String description;
     protected Status status;
+    protected static int taskId = 0;
+    protected int priority;
 
-    public Task(String dsc) {
+    public Task(String dsc, int p) {
         this.description = dsc;
         this.status = Status.UNFINISHED;
+        this.taskId = taskId++;
+        this.priority = p;
+    }
+
+    /**
+     * Returns the priority value a.k.a. the number of points a user earns upon task completion
+     * @return the priority value of a task
+     */
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int p) {
+        this.priority = p; //not immutable
+    }
+
+    public int getTaskID() {
+        return taskId;
     }
 
     public String getStatusIcon() {
@@ -31,7 +51,7 @@ public abstract class Task {
 
     public void setInProgress() {
         this.status = status.IN_PROGRESS;
-    } //not in use yet
+    }
 
     public void setNotCompleted() {
 
@@ -45,7 +65,7 @@ public abstract class Task {
     @Override
     public String toString() {
 
-        return getStatusIcon() + " " + getDescription();
+        return "[Priority Score: " + getPriority() + "]" + getStatusIcon() + " " + getDescription();
     }
 
     public String toStorageString() {

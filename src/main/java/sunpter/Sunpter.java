@@ -4,12 +4,12 @@ import command.Command;
 import exception.SunpterException;
 import parser.Parser;
 import storage.Storage;
-import task.Roster;
+import task.PriorityRoster;
 import ui.Ui;
 
 public class Sunpter {
     private Storage storage;
-    private Roster roster;
+    private PriorityRoster roster;
     private Ui ui;
     private Parser parser;
 
@@ -17,9 +17,9 @@ public class Sunpter {
         ui = new Ui();
         storage = new Storage();
         try {
-            roster = new Roster(storage.loadTasks());
+            roster = new PriorityRoster(storage.loadTasks());
         } catch (SunpterException e) {
-            roster = new Roster();
+            roster = new PriorityRoster();
         }
         parser = new Parser();
     }

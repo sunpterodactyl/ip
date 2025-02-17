@@ -12,8 +12,8 @@ public class Deadline extends Task {
     protected LocalDateTime deadline;
     static DateTimeFormatter formatFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Deadline(String name, String deadline) {
-        super(name);
+    public Deadline(String name, String deadline, int priority) {
+        super(name, priority);
         this.deadline = parseDate(deadline);
     }
 
@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + " " + getDescription() + "(by: " + deadline.format(formatFormatter) +")";
+        return "[D]" + super.toString() + "(by: " + deadline.format(formatFormatter) +")";
     }
 
     @Override
