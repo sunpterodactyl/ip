@@ -59,7 +59,7 @@ public abstract class Task {
     @Override
     public String toString() {
 
-        return "[Priority Score: " + getPriority() + "]" + getStatusIcon() + " " + getDescription();
+        return "[Priority Score: " + getPriority() + "] " + getStatusIcon() + " " + getDescription();
     }
 
     public String toStorageString() {
