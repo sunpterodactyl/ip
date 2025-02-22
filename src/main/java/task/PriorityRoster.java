@@ -17,6 +17,14 @@ public class PriorityRoster {
 
     public PriorityRoster(ArrayList<Task> rosterList) {
         this.rosterList = (rosterList == null) ? new ArrayList<>() : rosterList;
+        if(!rosterList.isEmpty()) {
+            for(Task task : rosterList) {
+                totalPriorityPoints += task.getPriority();
+                if(task.getStatus()) {
+                    completedPriorityPoints += task.getPriority();
+                }
+            }
+        }
     }
 
     /**

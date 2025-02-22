@@ -1,6 +1,5 @@
 package command;
 
-import exception.SunpterException;
 import storage.Storage;
 import task.PriorityRoster;
 import ui.Ui;

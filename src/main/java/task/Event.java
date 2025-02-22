@@ -31,6 +31,7 @@ public class Event extends Task {
 
     @Override
     public String toStorageString() {
-        return "[E]" + this.getStatus() + getPriority() + getDescription() + start.toString() + end.toString();
+        return "[E]" + " " + this.getStatus() + " " + getPriority() + " " + getDescription() + " /from " +
+                DateParser.parseStorage(start) + " /to " + DateParser.parseStorage(end);
     }
 }

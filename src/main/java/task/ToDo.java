@@ -16,6 +16,6 @@ public class ToDo extends Task{
 
     @Override
     public String toStorageString() {
-        return "[T]" + getStatus() + getPriority() + getDescription();
+        return "[T]" + " " + getStatus() + " " + getPriority() + " " + getDescription();
     }
 }

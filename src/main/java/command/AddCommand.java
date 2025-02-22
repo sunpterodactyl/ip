@@ -1,28 +1,40 @@
 package command;
+
 import exception.SunpterException;
 import storage.Storage;
-import task.*; //FIX
+import task.Task;
+import task.Deadline;
+import task.ToDo;
+import task.Event;
+import task.PriorityRoster;
 import ui.Ui;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import task.PriorityRoster;
 
 /**
- * Command that takes in input and adds the given task to the taskList
+ * Command that takes in input and adds tasks to the PriorityRoster
+ * Supports three task types: Todo, Deadline, and Event
  */
 public class AddCommand extends Command {
     private final String input;
-    public static final Pattern DEADLINE_FORMAT = Pattern.compile(
-            "deadline\\s+(.*?)\\s+/by\\s+(.*?)\\s+/priority\\s+(\\d+)");
-    public static final Pattern EVENT_FORMAT = Pattern.compile(
-            "event\\s+(.*?)\\s+/from\\s+(.*?)\\s+/to\\s+(.*?)\\s+/priority\\s+(\\d+)");
-    public static final Pattern TODO_FORMAT = Pattern.compile(
-            "todo\\s+(.*?)\\s+/priority\\s+(\\d+)");
 
+    private static final Pattern DEADLINE_FORMAT = Pattern.compile(
+            "deadline\\s+(?<description>\\S.*?)\\s+/by\\s+(?<deadline>\\S.*?)\\s+/priority\\s+(?<priority>\\d+)\\s*$");
+
+    private static final Pattern EVENT_FORMAT = Pattern.compile(
+            "event\\s+(?<description>\\S.*?)\\s+/from\\s+(?<start>\\S.*?)\\s+/to\\s+(?<end>\\S.*?)\\s+/priority\\s+(?<priority>\\d+)\\s*$");
+
+    private static final Pattern TODO_FORMAT = Pattern.compile(
+            "todo\\s+(?<description>\\S.*?)\\s+/priority\\s+(?<priority>\\d+)\\s*$");
+
+    /**
+     * Creates a new AddCommand
+     * @param input The raw command input
+     * @throws SunpterException if input is null
+     */
     public AddCommand(String input) {
         if (input == null) {
-            throw new IllegalArgumentException("Input cannot be null");
+            throw new SunpterException("Input cannot be null");
         }
         this.input = input.trim();
     }
@@ -30,6 +42,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(PriorityRoster roster, Ui ui, Storage storage) {
         try {
+            validateInput();
             Task task = createTask(input);
             roster.addTask(task);
             return ui.showTaskAddedMessage(task, roster.numberOfTasks());
@@ -39,119 +52,102 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Parses input and creates the task accordingly
-     * @param input user input string
-     * @return Task object: deadline, event or todo
+     * Validates the basic input structure
+     * @throws SunpterException if input is empty or doesn't start with a valid command
+     */
+    private void validateInput() throws SunpterException {
+        if (input.isEmpty()) {
+            throw new SunpterException("Task description cannot be empty");
+        }
+
+        String[] parts = input.split("\\s+", 2);
+        if (parts.length < 2) {
+            throw new SunpterException("Invalid task format");
+        }
+
+        String command = parts[0].toLowerCase();
+        if (!command.matches("todo|deadline|event")) {
+            throw new SunpterException("Task command should be: todo, deadline, or event");
+        }
+    }
+
+    /**
+     * Creates a task based on the input command
+     * @param input The command input string
+     * @return The created Task object
      * @throws SunpterException if the input format is invalid
      */
     private Task createTask(String input) throws SunpterException {
-        String[] parts = input.split("\\s+", 2);
-        if(parts.length < 2) {
-            throw new SunpterException("Invalid task format");
-        }
-        String cmd = parts[0];
+        String command = input.split("\\s+", 2)[0].toLowerCase();
+        return switch (command) {
+            case "deadline" -> createDeadlineTask(input);
+            case "event" -> createEventTask(input);
+            case "todo" -> createTodoTask(input);
+            default -> throw new SunpterException("Unknown task type: " + command);
+        };
+    }
 
+    /**
+     * Creates a Deadline task from the input
+     */
+    private Deadline createDeadlineTask(String input) throws SunpterException {
+        Matcher matcher = DEADLINE_FORMAT.matcher(input);
+        if (!matcher.matches()) {
+            throw new SunpterException("Invalid deadline format. Expected: deadline {description} /by {date} /priority {number}");
+        }
+
+        String description = matcher.group("description");
+        String deadline = matcher.group("deadline");
+        int priority = parsePriority(matcher.group("priority"));
+
+        return new Deadline(description, deadline, priority);
+    }
+
+    /**
+     * Creates an Event task from the input
+     */
+    private Event createEventTask(String input) throws SunpterException {
+        Matcher matcher = EVENT_FORMAT.matcher(input);
+        if (!matcher.matches()) {
+            throw new SunpterException("Invalid event format. Expected: event {description} /from {date} /to {date} /priority {number}");
+        }
+
+        String description = matcher.group("description");
+        String startDate = matcher.group("start");
+        String endDate = matcher.group("end");
+        int priority = parsePriority(matcher.group("priority"));
+
+        return new Event(description, startDate, endDate, priority);
+    }
+
+    /**
+     * Creates a Todo task from the input
+     */
+    private ToDo createTodoTask(String input) throws SunpterException {
+        Matcher matcher = TODO_FORMAT.matcher(input);
+        if (!matcher.matches()) {
+            throw new SunpterException("Invalid todo format. Expected: todo {description} /priority {number}");
+        }
+
+        String description = matcher.group("description");
+        int priority = parsePriority(matcher.group("priority"));
+
+        return new ToDo(description, priority);
+    }
+
+    /**
+     * Parses and validates the priority value
+     * @throws SunpterException if priority is invalid
+     */
+    private int parsePriority(String priorityStr) throws SunpterException {
         try {
-            return switch (cmd) {
-                case ("deadline") -> {
-                    String paramDeadline = getDeadlineEndDate(input);
-                    String item = getItem(input, DEADLINE_FORMAT);
-                    int priority = getPriority(input, DEADLINE_FORMAT);
-                    yield new Deadline(item, paramDeadline, priority);
-                }
-                case ("event") -> {
-                    String item = getItem(input, EVENT_FORMAT);
-                    String[] eventDeadline = getEventDates(input);
-                    int priority = getPriority(input, EVENT_FORMAT);
-                    yield new Event(item, eventDeadline[0], eventDeadline[1], priority);
-                }
-                case ("todo") -> {
-                    String item = getItem(input, TODO_FORMAT);
-                    int priority = getPriority(input, TODO_FORMAT);
-                    yield new ToDo(item, priority);
-                }
-                default -> throw new SunpterException("Task command should be add {todo/deadline/event}");
-            };
-        } catch (DateTimeParseException e) {
-            throw new SunpterException("Invalid date format: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Parses the deadline from the deadline task
-     *
-     * @param input user input string
-     * @return extracted deadline date
-     * @throws SunpterException if the format is invalid
-     */
-    private String getDeadlineEndDate(String input) throws SunpterException {
-        Matcher matcher = AddCommand.DEADLINE_FORMAT.matcher(input);
-        if (matcher.find()) {
-            String deadline = matcher.group(2).trim();
-            if (deadline.isEmpty()) {
-                throw new SunpterException("Deadline cannot be empty");
+            int priority = Integer.parseInt(priorityStr);
+            if (priority < 0) {
+                throw new SunpterException("Priority cannot be negative");
             }
-            return deadline;
+            return priority;
+        } catch (NumberFormatException e) {
+            throw new SunpterException("Priority must be a valid number");
         }
-        throw new SunpterException("Invalid deadline format. Expected: deadline {item} /by {date} /priority {number}");
-    }
-
-    /**
-     * Parses the start and end dates for an event task
-     *
-     * @param input user input string
-     * @return array containing start and end dates
-     * @throws SunpterException if the format is invalid
-     */
-    private String[] getEventDates(String input) throws SunpterException {
-        Matcher matcher = AddCommand.EVENT_FORMAT.matcher(input);
-        if (matcher.find()) {
-            String start = matcher.group(2).trim();
-            String end = matcher.group(3).trim();
-            if (start.isEmpty() || end.isEmpty()) {
-                throw new SunpterException("Event dates cannot be empty");
-            }
-            return new String[]{start, end};
-        }
-        throw new SunpterException("Invalid event format. Expected: event {item} /from {date} /to {date} /priority {number}");
-    }
-
-    /**
-     * Parses a task description
-     * @param input user input string
-     * @param pattern regex pattern to match
-     * @return extracted task description
-     * @throws SunpterException if the format is invalid
-     */
-    private String getItem(String input, Pattern pattern) throws SunpterException {
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            String item = matcher.group(1).trim();
-            if (item.isEmpty()) {
-                throw new SunpterException("Task description cannot be empty");
-            }
-            return item;
-        }
-        throw new SunpterException("Invalid format. Unable to extract item description.");
-    }
-
-    /**
-     * Parses the priority level for a task object
-     * @param input user input string
-     * @param pattern regex pattern to match
-     * @return extracted priority level
-     * @throws SunpterException if the format is invalid
-     */
-    private int getPriority(String input, Pattern pattern) throws SunpterException {
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            String priorityGroup = pattern.pattern().contains("todo") ? matcher.group(2) : matcher.group(4);
-            try {
-                return Integer.parseInt(priorityGroup.trim());
-            } catch (NumberFormatException e) {
-                throw new SunpterException("Priority must be a valid number");
-            }
-        }
-        throw new SunpterException("Invalid format. Unable to extract priority.");
     }
 }

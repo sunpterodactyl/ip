@@ -23,6 +23,7 @@ public class Deadline extends Task {
     }
     @Override
     public String toStorageString() {
-        return "[D]" + this.getStatus() + getPriority() + getDescription() + deadline.toString() ;
+        return "[D]" + " " + this.getStatus() + " " + getPriority() + " " +
+                getDescription() + " /by " + DateParser.parseStorage(deadline);
     }
 }
