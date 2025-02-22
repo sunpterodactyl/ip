@@ -1,6 +1,8 @@
 # Sunpter User Guide
 
-// Product screenshot goes here
+## Preview 
+
+![Preview](https://github.com/sunpterodactyl/ip/blob/master/docs/Ui.png.jpg)
 
 Hi, I'm Sunpter your personalised priority assistant. Here are some great things about me 
 - I remember tasks for you
