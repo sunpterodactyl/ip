@@ -7,6 +7,8 @@ import storage.Storage;
 import task.PriorityRoster;
 import ui.Ui;
 
+import java.io.IOException;
+
 public class Sunpter {
     private Storage storage;
     private PriorityRoster roster;
@@ -18,8 +20,9 @@ public class Sunpter {
         storage = new Storage();
         try {
             roster = new PriorityRoster(storage.loadTasks());
-        } catch (SunpterException e) {
-            roster = new PriorityRoster();
+        }
+        catch (IOException e) {
+            throw new SunpterException("Error reading from file");
         }
         parser = new Parser();
     }

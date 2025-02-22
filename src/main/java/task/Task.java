@@ -30,10 +30,6 @@ public abstract class Task {
         return priority;
     }
 
-    public void setPriority(int p) {
-        this.priority = p; //not immutable
-    }
-
     public int getTaskID() {
         return taskId;
     }
@@ -56,13 +52,15 @@ public abstract class Task {
         return description;
     }
 
+    public boolean getStatus() {
+        return status == Status.FINISHED;
+    }
+
     @Override
     public String toString() {
-
         return "[Priority Score: " + getPriority() + "] " + getStatusIcon() + " " + getDescription();
     }
-
     public String toStorageString() {
         return "";
-    }
+    };
 }

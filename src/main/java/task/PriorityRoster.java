@@ -19,11 +19,6 @@ public class PriorityRoster {
         this.rosterList = (rosterList == null) ? new ArrayList<>() : rosterList;
     }
 
-    //prepare to remove this
-    public PriorityRoster() {
-        this.rosterList = new ArrayList<>();
-    }
-
     /**
      * Return the number of tasks in the roster
      * @return int
