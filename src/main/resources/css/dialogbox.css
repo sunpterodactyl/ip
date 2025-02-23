@@ -1,7 +1,7 @@
 .label {
-    -fx-background-color: #0D0D0D;
+    -fx-background-color: #0c0c53;
     -fx-text-fill: white;
-    -fx-border-color: #FF7300;
+    -fx-border-color: #03034a;
     -fx-border-width: 1px;
     -fx-background-radius: 0.5em;
     -fx-border-radius: 0.5em;
@@ -16,14 +16,3 @@
     -fx-padding: 5px 10px;
 }
 
-#displayPicture {
-    -fx-shape: "M 50, 25 A 25, 25 0 1, 1 50, 75 A 25, 25 0 1, 1 50, 25";
-    -fx-clip: "M 50, 25 A 25, 25 0 1, 1 50, 75 A 25, 25 0 1, 1 50, 25";
-
-
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.3, 2, 2);
-
-    /* Resize the image */
-    -fx-scale-x: 0.7;
-    -fx-scale-y: 0.7;
-}

@@ -33,9 +33,6 @@ public class AddCommand extends Command {
      * @throws SunpterException if input is null
      */
     public AddCommand(String input) {
-        if (input == null) {
-            throw new SunpterException("Input cannot be null");
-        }
         this.input = input.trim();
     }
 
@@ -56,18 +53,14 @@ public class AddCommand extends Command {
      * @throws SunpterException if input is empty or doesn't start with a valid command
      */
     private void validateInput() throws SunpterException {
-        if (input.isEmpty()) {
-            throw new SunpterException("Task description cannot be empty");
-        }
-
         String[] parts = input.split("\\s+", 2);
         if (parts.length < 2) {
-            throw new SunpterException("Invalid task format");
+            throw new SunpterException("Nuh-uh. I need more than that.");
         }
 
         String command = parts[0].toLowerCase();
         if (!command.matches("todo|deadline|event")) {
-            throw new SunpterException("Task command should be: todo, deadline, or event");
+            throw new SunpterException("SLAP👋 Task command should be: todo, deadline, or event");
         }
     }
 
@@ -83,7 +76,7 @@ public class AddCommand extends Command {
             case "deadline" -> createDeadlineTask(input);
             case "event" -> createEventTask(input);
             case "todo" -> createTodoTask(input);
-            default -> throw new SunpterException("Unknown task type: " + command);
+            default -> throw new SunpterException("SLAP👋unknown task type");
         };
     }
 
@@ -93,7 +86,7 @@ public class AddCommand extends Command {
     private Deadline createDeadlineTask(String input) throws SunpterException {
         Matcher matcher = DEADLINE_FORMAT.matcher(input);
         if (!matcher.matches()) {
-            throw new SunpterException("Invalid deadline format. Expected: deadline {description} /by {date} /priority {number}");
+            throw new SunpterException("SLAP👋 Invalid deadline format. Expected: deadline {description} /by {date} /priority {number}");
         }
 
         String description = matcher.group("description");
@@ -109,7 +102,7 @@ public class AddCommand extends Command {
     private Event createEventTask(String input) throws SunpterException {
         Matcher matcher = EVENT_FORMAT.matcher(input);
         if (!matcher.matches()) {
-            throw new SunpterException("Invalid event format. Expected: event {description} /from {date} /to {date} /priority {number}");
+            throw new SunpterException("SLAP👋 Invalid event format. Expected: event {description} /from {date} /to {date} /priority {number}");
         }
 
         String description = matcher.group("description");
@@ -126,7 +119,7 @@ public class AddCommand extends Command {
     private ToDo createTodoTask(String input) throws SunpterException {
         Matcher matcher = TODO_FORMAT.matcher(input);
         if (!matcher.matches()) {
-            throw new SunpterException("Invalid todo format. Expected: todo {description} /priority {number}");
+            throw new SunpterException("SLAP👋 Invalid todo format. Expected: todo {description} /priority {number}");
         }
 
         String description = matcher.group("description");
@@ -140,14 +133,10 @@ public class AddCommand extends Command {
      * @throws SunpterException if priority is invalid
      */
     private int parsePriority(String priorityStr) throws SunpterException {
-        try {
-            int priority = Integer.parseInt(priorityStr);
-            if (priority < 0) {
-                throw new SunpterException("Priority cannot be negative");
-            }
-            return priority;
-        } catch (NumberFormatException e) {
-            throw new SunpterException("Priority must be a valid number");
+        int priority = Integer.parseInt(priorityStr);
+        if (priority < 0) {
+            throw new SunpterException("SLAP👋Priority cannot be negative");
         }
+        return priority;
     }
 }

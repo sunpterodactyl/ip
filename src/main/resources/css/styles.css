@@ -1,14 +1,16 @@
 .root {
-    main-color: #0D0D0D ;
+    main-color: #ddddb7;
     -fx-background-color: main-color;
-    main-orange: #FF7300;
+    -fx-background-image: url('/images/oscar.jpg');
+    -fx-background-position: center;
+    main-blue: #3d3db3;
 }
 
 .text-field {
     -fx-background-color: main-color;
-    -fx-text-fill: main-orange;
+    -fx-text-fill: main-blue;
     -fx-font: 20px "Arial";
-    -fx-border-color: main-orange;
+    -fx-border-color: main-blue;
     -fx-border-width: 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
@@ -17,9 +19,9 @@
 
 .button {
     -fx-background-color: main-color;
-    -fx-text-fill: main-orange;
+    -fx-text-fill: main-blue;
     -fx-font: italic bold 24px "Arial";
-    -fx-border-color: main-orange;
+    -fx-border-color: main-blue;
     -fx-border-width: 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
@@ -42,11 +44,11 @@
 
 .scroll-bar {
     -fx-font-size: 10px;
-    -fx-background-color: main-orange;
+    -fx-background-color: main-blu4;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: main-orange;
+    -fx-background-color: white;
     -fx-background-radius: 1em;
 }
 

@@ -26,7 +26,7 @@ public class StorageParser {
             case "[T]" -> parseTodo(details, priority);
             case "[E]" -> parseEvent(details, priority);
             case "[D]" -> parseDeadline(details, priority);
-            default -> throw new SunpterException("Unknown task type: " + type);
+            default -> throw new SunpterException("You seeing things? Unknown task type: " + type);
         };
 
         if(isDone) {

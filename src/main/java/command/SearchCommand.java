@@ -24,6 +24,6 @@ public class SearchCommand extends Command {
         if(searchRoster.numberOfTasks() == 0) {
             return "Sorry :( , no tasks found for keyword: " + keyword;
         }
-        return ui.printMessage("Here are the matching tasks in your list:\n" + searchRoster.printRoster());
+        return "Here are the matching tasks in your list:\n" + searchRoster.printRoster();
     }
 }

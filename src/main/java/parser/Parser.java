@@ -3,6 +3,8 @@ package parser;
 import command.*;
 
 import exception.SunpterException;
+import sunpter.Sunpter;
+import ui.Ui;
 
 import java.util.Set;
 /**
@@ -14,7 +16,7 @@ public class Parser {
 
     public Command parseCommand(String input) throws SunpterException {
         if(input == null || input.trim().isEmpty()) {
-            return new InvalidCommand("PLease type in input. See the help command for more");
+            throw new SunpterException("What are you on? Type help man.");
         }
         String[] parts = input.trim().split("\\s+", 2);
         String command = parts[0].toUpperCase();
@@ -30,9 +32,7 @@ public class Parser {
                 case "SEARCH" -> new SearchCommand(removeFirstWord(input));
                 case "PRIORITY" -> new ListPriorityCommand();
                 case "HELP" -> new HelpCommand();
-                default -> new InvalidCommand("Wrong command. This command does not exist\n" +
-                        " Please use the following commands:" + "\n" +
-                        "mark , unmark, add, delete, list");
+                default -> new InvalidCommand(Ui.incorrectFormattingError("mark , unmark, add, delete, list"));
             };
         } catch (SunpterException e) {
             return new InvalidCommand(e.getMessage());
@@ -56,17 +56,17 @@ public class Parser {
      */
     public static String removeFirstWord(String str) throws SunpterException {
         if (str == null || str.trim().isEmpty()) {
-            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
+            throw new SunpterException("SLAP👋 That command doesn't exist. Try {keyword} then {action}");
         }
 
         int firstSpace = str.indexOf(" ");
         if (firstSpace == -1) {
-            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
+            throw new SunpterException("SLAP👋 That command doesn't exist. Try {keyword} then {action}");
         }
 
         String keyword = str.substring(firstSpace + 1).trim();
         if (keyword.isEmpty()) {
-            throw new SunpterException("Invalid command. Please type in {keyword} then {action}");
+            throw new SunpterException("SLAP👋 That command doesn't exist. Try {keyword} then {action}");
         }
 
         return keyword;

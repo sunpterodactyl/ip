@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -23,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String name) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(GUIWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -35,6 +36,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setFitWidth(70);
+        displayPicture.setFitHeight(70);
+
+        double radius = 25;
+        displayPicture.setClip(new javafx.scene.shape.Circle(radius, radius, radius));
     }
 
     /**
@@ -48,11 +54,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "Chris");
     }
 
     public static DialogBox getSunpterDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "Will");
         db.flip();
         return db;
     }

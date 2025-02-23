@@ -33,9 +33,9 @@ public class GUIWindow extends AnchorPane {
     private final Parser parser = new Parser();
 
     private final Image userImage =
-            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/prison_mike.jpg")));
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/chris.png")));
     private final Image sunpterImage =
-            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/sunpter.png")));
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/will.png")));
 
     @FXML
     public void initialize() {

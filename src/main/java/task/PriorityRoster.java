@@ -2,6 +2,8 @@ package task;
 
 import exception.SunpterException;
 import storage.Storage;
+import sunpter.Sunpter;
+
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -71,7 +73,7 @@ public class PriorityRoster {
      */
     public void removeTask(int index) {
         if(index < 1 || index > rosterList.size()){
-            throw new IndexOutOfBoundsException("Task index out of bounds");
+            throw new SunpterException("Input a number between 1 and "+rosterList.size()+" tasks");
         }
         Task removedTask = getTask(index);
         rosterList.remove(index - 1);
@@ -150,8 +152,13 @@ public class PriorityRoster {
     public TreeSet<Task> getTasksPriorityQueue() {
         TreeSet<Task> priorityList = new TreeSet<>((a, b) -> {
             int priorityComparison = Integer.compare(b.getPriority(), a.getPriority());
-            return (priorityComparison != 0) ? priorityComparison : Integer.compare(a.getTaskID(), b.getTaskID());
+            if (priorityComparison != 0) return priorityComparison;
+            int idComparison = Integer.compare(a.getTaskID(), b.getTaskID());
+            if (idComparison != 0) return idComparison;
+
+            return Integer.compare(System.identityHashCode(a), System.identityHashCode(b));
         });
+
         priorityList.addAll(rosterList);
         return priorityList;
     }

@@ -18,8 +18,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(PriorityRoster roster, Ui ui, Storage storage) {
         Task task = roster.getTask(num);
-        if (task == null) {
-            return ui.taskDoesNotExist("");//STUB
+        if (num < 1 || num > roster.numberOfTasks()) {
+            throw new IndexOutOfBoundsException("Please input a valid task number between 1 and "
+                    + (roster.numberOfTasks()));
         }
         roster.removeTask(num);
         return ui.removeTaskMessage(task, roster);

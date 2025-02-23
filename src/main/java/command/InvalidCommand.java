@@ -14,6 +14,6 @@ public class InvalidCommand extends Command {
 
     @Override
     public String execute(PriorityRoster priorityRoster, Ui ui, Storage storage) {
-        return ui.incorrectFormattingError(message);
+        return message;
     }
 }

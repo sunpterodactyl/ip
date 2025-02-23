@@ -8,22 +8,14 @@ import task.Task;
  * The Ui class handles user interactions by returning formatted messages to the Sunpter main class.
  */
 public class Ui {
-    private static final String GREETING = "Hi, I'm Sunpter I help you prioritise. Type help to get my user guide.";
-    private static final String FIN = "Ok bye.";
-    private static final String TASK_DONE = "Incredible! This task is completed!";
-    private static final String TASK_UNDONE = "Unmarked. Keep trying!";
+    private static final String GREETING = "Now this is a story all about how I became a chatbot just messing around!" +
+                                                "\n Type help to find out more";
+    private static final String FIN = "Alright show’s over. Keep my name out your mouth, and keep your tasks in check.";
+    private static final String TASK_DONE = "That’s what I like to see!\n Now this is how you win an award.";
+    private static final String TASK_UNDONE = "You unmarked it? SLAP👋" +
+                                                "\nThat’s like taking back an apology after the show ended.";
 
     public Ui() {
-    }
-
-    /**
-     * Prints a formatted message with horizontal lines.
-     *
-     * @param message The message to be printed.
-     * @return The formatted message.
-     */
-    public String printMessage(String message) {
-        return message;
     }
 
     /**
@@ -78,14 +70,7 @@ public class Ui {
      * @param formatting The correct formatting required.
      */
     public static String incorrectFormattingError(String formatting) {
-        return"Wrong format! This command should follow " + formatting;
-    }
-
-    /**
-     * Prints a message when a task does not exist.
-     */
-    public String taskDoesNotExist(String message) {
-        return "This task doesn't exist!" + "\n" + message;
+        return"SLAP👋 That isn’t the right format. Try:" + formatting;
     }
 
     /**
@@ -95,18 +80,12 @@ public class Ui {
      * @param rosterSize The current size of the roster.
      */
     public String showTaskAddedMessage(Task task, int rosterSize) {
-        String taskAdded = "Got it. I've added this task:" +
+        String taskAdded = "Gotcha. I've added this task:" +
                 "\n" + task.toString() + "\n" +
                 "Now you have " + rosterSize + " tasks in the list.";
         return taskAdded;
     }
 
-    /**
-     * Shows and explains that the storage is not able to load any tasks
-     */
-    public String showLoadingError() {
-        return "Error: Unable to load tasks from storage. Starting with an empty task list.";
-    }
     /**
      * Shows the number of priority points earned by completed tasks
      */
@@ -114,7 +93,7 @@ public class Ui {
         int completedPoints = roster.getCompletedPriorityPoints();
         int totalPoints = roster.getTotalPriorityPoints();
         int percentage = (int) Math.round(((double) completedPoints / totalPoints) * 100);
-        return " You’ve completed " +
+        return " Alright, here’s where you stand: " +
                  completedPoints+ "/" + totalPoints +
                 "priority points (" + percentage +"%). Keep going! 🚀";
     }

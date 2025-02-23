@@ -14,6 +14,6 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(PriorityRoster priorityRoster, Ui ui, Storage storage) {
-        return ui.printMessage(priorityRoster.printRoster());
+        return priorityRoster.printRoster();
     }
 }
