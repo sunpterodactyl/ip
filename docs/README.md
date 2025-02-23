@@ -4,7 +4,7 @@
 
 ![Preview](https://github.com/sunpterodactyl/ip/blob/master/docs/Ui.png)
 
-Hi, I'm Sunpter your personalised priority assistant. Here are some great things about me 
+Hi, I'm Sunpter your personalised priority assistant - but I've recently been taken over by another character. Here are some great things about me 
 - I remember tasks for you
 - I can list tasks in order of priority
 - I'm a simple chatbot  
