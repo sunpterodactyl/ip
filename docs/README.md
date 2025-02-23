@@ -2,7 +2,7 @@
 
 ## Preview 
 
-![Preview](https://github.com/sunpterodactyl/ip/blob/master/docs/Ui.png.jpg)
+![Preview](https://github.com/sunpterodactyl/ip/blob/master/docs/Ui.png)
 
 Hi, I'm Sunpter your personalised priority assistant. Here are some great things about me 
 - I remember tasks for you
